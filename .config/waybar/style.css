@@ -1,37 +1,138 @@
+/* Blue-Purple Theme for Waybar */
+
 * {
-    font-family: "FiraCode Nerd Font", monospace;
-    font-size: 14px;
-    color: #ffffff;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 0 8px;
-    margin: 0;
+    font-size: 15px;
+    font-family: "CodeNewRoman Nerd Font Propo";
 }
 
-#waybar {
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+/* Base window */
+window#waybar {
+    all: unset;
 }
 
-.module {
-    padding: 0 10px;
-    margin: 0 4px;
+/* Modules styling */
+.modules-left,
+.modules-center,
+.modules-right {
+    padding: 7px;
+    margin: 10px 0 5px 0;
+    border-radius: 10px;
+    background: rgba(30, 25, 60, 0.6); /* semi-transparent dark blue-purple */
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.6);
 }
 
-.module:hover {
-    color: #00ffff;
-    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+.modules-left {
+    margin-left: 10px;
+}
+.modules-right {
+    margin-right: 10px;
 }
 
+/* Tooltip */
+tooltip {
+    background: #1E193C;
+    color: #C5B8FF;
+}
+
+/* Hover effects */
+#clock:hover, #custom-pacman:hover, #custom-notification:hover,
+#network:hover, #battery:hover,
+#cpu:hover, #memory:hover, #temperature:hover {
+    transition: all 0.3s ease;
+    color: #8A63FF;
+}
+
+/* Specific modules */
+#custom-notification,
+#clock,
+#custom-pacman,
+#network,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#group-expand,
+#tray,
+#custom-colorpicker {
+    padding: 0px 5px;
+    transition: all 0.3s ease;
+    color: #C5B8FF;
+}
+
+/* Clock and pacman */
 #clock {
-    font-weight: bold;
-    text-shadow: 0 0 5px #00ffff;
+    color: #C5B8FF;
 }
 
-.custom {
-    font-weight: bold;
-    text-shadow: 0 0 3px #00ffff;
+/* Workspaces */
+#workspaces {
+    padding: 0px 5px;
 }
 
-tray {
-    padding-right: 10px;
+#workspaces button {
+    all: unset;
+    padding: 0px 5px;
+    color: rgba(138, 99, 255, 0.4); /* lighter blue-purple */
+    transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+    color: rgba(138, 99, 255, 0.8);
+    border: none;
+    text-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.5);
+    transition: all 1s ease;
+}
+
+#workspaces button.active {
+    color: #8A63FF;
+    border: none;
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+}
+
+#workspaces button.empty {
+    color: rgba(0, 0, 0, 0);
+    text-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.empty:hover {
+    text-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.5);
+}
+
+#workspaces button.empty.active {
+    color: #8A63FF;
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Battery states */
+#battery.charging { color: #26A65B; }
+#battery.warning:not(.charging) { color: #FFD86B; }
+#battery.critical:not(.charging) {
+    color: #F53C3C;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* Custom expand */
+#custom-expand {
+    color: rgba(197, 184, 255, 0.2);
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7);
+}
+#custom-expand:hover {
+    color: rgba(138, 99, 255, 0.2);
+    text-shadow: 0px 0px 2px rgba(138, 99, 255, 0.5);
+}
+
+/* Tray menu */
+#tray menu *,
+#tray menu separator {
+    padding: 0px 5px;
+    transition: all 0.3s ease;
+}
+
+/* CPU, memory, temperature */
+#cpu, #memory, #temperature {
+    color: #C5B8FF;
 }
