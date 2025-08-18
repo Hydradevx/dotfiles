@@ -1,0 +1,24 @@
+{
+  "layer": "top",
+  "position": "top",
+  "modules-left": ["custom/hyprws"],
+  "modules-center": ["clock"],
+  "modules-right": ["battery", "pulseaudio", "tray"],
+
+  "clock": {
+    "format": "{:%H:%M}"
+  },
+
+  "battery": {
+    "format": "{capacity}%"
+  },
+
+  "pulseaudio": {
+    "format": "{volume}%"
+  },
+
+  "custom/hyprws": {
+    "exec": "~/.config/waybar/hypr_workspaces.sh",
+    "interval": 2
+  }
+}

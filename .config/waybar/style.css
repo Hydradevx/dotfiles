@@ -1,0 +1,62 @@
+/* === Waybar Style === */
+/* Global */
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 12px;
+  min-height: 0;
+}
+
+#waybar {
+    background-color: rgba(0, 0, 0, 0.6); /* semi-transparent black */
+    border-radius: 8px;
+    padding: 4px;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    color: #ffffff; /* text color */
+}
+
+#workspaces button {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    padding: 2px 6px;
+}
+
+#workspaces button.active {
+    background-color: rgba(255, 255, 255, 0.3);
+    font-weight: bold;
+}
+
+
+/* Modules (clock, tray, etc.) */
+#clock,
+#battery,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#tray {
+  padding: 4px 10px;
+  margin: 0 4px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Hover effect */
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#network:hover,
+#pulseaudio:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Tooltip */
+tooltip {
+  background: rgba(30, 30, 40, 0.9);
+  border-radius: 6px;
+  padding: 6px;
+  color: #fff;
+}
+
