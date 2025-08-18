@@ -1,24 +1,36 @@
 {
   "layer": "top",
   "position": "top",
-  "modules-left": ["custom/hyprws"],
+  "height": 30,
+  "modules-left": ["custom/workspaces"],
   "modules-center": ["clock"],
-  "modules-right": ["battery", "pulseaudio", "tray"],
+  "modules-right": ["custom/cpu", "custom/ram", "battery", "pulseaudio", "tray"],
 
   "clock": {
     "format": "{:%H:%M}"
   },
 
   "battery": {
-    "format": "{capacity}%"
+    "format": " {capacity}%"
   },
 
   "pulseaudio": {
-    "format": "{volume}%"
+    "format": " {volume}%"
   },
 
-  "custom/hyprws": {
-    "exec": "~/.config/waybar/hypr_workspaces.sh",
+  "custom/workspaces": {
+    "exec": "hyprctl workspaces -j | jq -r '.[] | select(.focused==true).name'",
+    "interval": 1,
+    "format": " {output}"
+  },
+
+  "custom/cpu": {
+    "exec": "grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {printf(\" %.0f%%\", usage)}'",
+    "interval": 2
+  },
+
+  "custom/ram": {
+    "exec": "free -h | awk '/^Mem:/ {printf(\" %s/%s\", $3,$2)}'",
     "interval": 2
   }
 }

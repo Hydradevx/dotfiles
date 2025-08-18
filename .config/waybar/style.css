@@ -1,62 +1,37 @@
-/* === Waybar Style === */
-/* Global */
 * {
-  border: none;
-  border-radius: 0;
-  font-family: "JetBrainsMono Nerd Font", monospace;
-  font-size: 12px;
-  min-height: 0;
+    font-family: "FiraCode Nerd Font", monospace;
+    font-size: 14px;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 0 8px;
+    margin: 0;
 }
 
 #waybar {
-    background-color: rgba(0, 0, 0, 0.6); /* semi-transparent black */
-    border-radius: 8px;
-    padding: 4px;
-    font-family: "JetBrainsMono Nerd Font", monospace;
-    color: #ffffff; /* text color */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
 }
 
-#workspaces button {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    padding: 2px 6px;
+.module {
+    padding: 0 10px;
+    margin: 0 4px;
 }
 
-#workspaces button.active {
-    background-color: rgba(255, 255, 255, 0.3);
+.module:hover {
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+}
+
+#clock {
     font-weight: bold;
+    text-shadow: 0 0 5px #00ffff;
 }
 
-
-/* Modules (clock, tray, etc.) */
-#clock,
-#battery,
-#cpu,
-#memory,
-#network,
-#pulseaudio,
-#tray {
-  padding: 4px 10px;
-  margin: 0 4px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.05);
+.custom {
+    font-weight: bold;
+    text-shadow: 0 0 3px #00ffff;
 }
 
-/* Hover effect */
-#clock:hover,
-#battery:hover,
-#cpu:hover,
-#memory:hover,
-#network:hover,
-#pulseaudio:hover {
-  background: rgba(255, 255, 255, 0.15);
+tray {
+    padding-right: 10px;
 }
-
-/* Tooltip */
-tooltip {
-  background: rgba(30, 30, 40, 0.9);
-  border-radius: 6px;
-  padding: 6px;
-  color: #fff;
-}
-
