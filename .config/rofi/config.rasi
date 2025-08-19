@@ -1,0 +1,220 @@
+/* ---- 🎨 Custom Rofi Theme: Blue-Purple Glow ---- */
+/* Inspired by JaKooLit / Adi1090x configs */
+
+/*****----- Configuration -----*****/
+configuration {
+    modi:                       "drun,run,window";
+    show-icons:                 true;
+    display-drun:               " Apps";
+    display-run:                " Run";
+    display-window:             " Window";
+    drun-display-format:        "{name}";
+    window-format:              "{w} · {c} · {t}";
+    hover-select:               true;
+    me-select-entry:            "MouseSecondary";
+    me-accept-entry:            "MousePrimary";
+}
+
+/*****----- Colors (Blue-Purple Palette) -----*****/
+/* Replace wallust with static theme colors */
+* {
+    background:        #0d0d17;   /* deep night */
+    foreground:        #dfe6f7;   /* soft white */
+    color0:            #12121f;   /* darkest */
+    color1:            #1c1c2e;   /* bg-alt */
+    color2:            #3a2f59;   /* purple shadow */
+    color3:            #4c3c72;   /* dim purple */
+    color4:            #5d4c99;   /* medium purple */
+    color5:            #7a5cd0;   /* brighter purple */
+    color6:            #3a6fc0;   /* blue */
+    color7:            #56aaff;   /* bright blue */
+    color8:            #9b6bdf;   /* glow purple */
+    color9:            #b48ef0;   /* lavender */
+    color10:           #8fbcff;   /* light blue */
+    color11:           #6ab4ff;   /* cyan-blue */
+    color12:           #ff9bf0;   /* pink accent */
+    urgent:            #ff4971;   /* hot pink red */
+
+    border-color:      @color7;
+    selected:          @color7;
+    active:            @color5;
+    handle-color:      @color6;
+
+    /* Text coloring */
+    normal-background: @background;
+    normal-foreground: @foreground;
+    selected-normal-background: @selected;
+    selected-normal-foreground: @background;
+    urgent-background: @urgent;
+    urgent-foreground: @background;
+    active-background: @active;
+    active-foreground: @background;
+}
+
+/*****----- Window -----*****/
+window {
+    transparency:      "real";
+    location:          center;
+    anchor:            center;
+    fullscreen:        false;
+    width:             38%;
+    x-offset:          0px;
+    y-offset:          0px;
+
+    margin:            0px;
+    padding:           0px;
+    border:            2px solid;
+    border-radius:     18px;
+    border-color:      @border-color;
+    cursor:            "default";
+    background-color: @color2;
+    text-color:        @foreground;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    spacing:           12px;
+    margin:            0px;
+    padding:           24px;
+    border:            0px solid;
+    border-radius:     0px;
+    background-color:  rgba(13, 13, 23, 0.85);
+    children:          [ "inputbar", "message", "custombox" ];
+}
+
+/*****----- Custom Box -----*****/
+custombox {
+    spacing:           0px;
+    background-color:  @color1;
+    text-color:        @foreground;
+    orientation:       horizontal;
+    children:          [ "mode-switcher", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    spacing:           12px;
+    padding:           10px 16px;
+    border-radius:     12px;
+    border:            2px solid;
+    border-color:      @border-color;
+    background-color:  @color1;
+    text-color:        @foreground;
+    children:          [ "textbox-prompt-colon", "entry" ];
+}
+textbox-prompt-colon {
+    str:               " 🔎";
+    padding:           4px;
+    expand:            false;
+    text-color:        @color7;
+}
+entry {
+    padding:           6px;
+    background-color:  @color1;
+    text-color:        @foreground;
+    placeholder:       "Search apps…";
+    placeholder-color: @color9;
+    cursor:            text;
+}
+
+/*****----- Listview -----*****/
+listview {
+    columns:           1;
+    lines:             8;
+    cycle:             true;
+    dynamic:           true;
+    scrollbar:         false;
+    layout:            vertical;
+    fixed-height:      true;
+    fixed-columns:     true;
+
+    spacing:           8px;
+    padding:           12px;
+    border:            0px;
+    background-color:  transparent;
+}
+scrollbar {
+    handle-width:      4px;
+    handle-color:      @handle-color;
+    border-radius:     12px;
+}
+
+/*****----- Elements (Apps) -----*****/
+element {
+    spacing:           8px;
+    padding:           12px;
+    border-radius:     10px;
+    background-color:  transparent;
+    cursor:            pointer;
+    text-color:        @foreground;
+}
+element normal.normal {
+    background-color:  transparent;
+}
+element normal.urgent {
+    background-color:  @urgent;
+}
+element normal.active {
+    background-color:  rgba(122,92,208,0.3);
+}
+
+element-text selected,
+element selected.normal {
+    background-color:  @color7;
+    text-color:        @background;
+}
+element selected.urgent {
+    background-color:  @urgent;
+}
+element selected.active {
+    background-color:  @color5;
+}
+element-icon {
+    background-color:  transparent;
+    text-color:        inherit;
+}
+element-text {
+    text-color:        inherit;
+    vertical-align:    0.5;
+}
+
+/*****----- Mode Switcher -----*****/
+mode-switcher {
+    orientation:       vertical;
+    spacing:           0px;
+    padding:           4px;
+    border-radius:     12px;
+    background-color:  @color1;
+    text-color:        @foreground;
+}
+button {
+    padding:           8px 20px;
+    border-radius:     8px;
+    background-color:  transparent;
+    cursor:            pointer;
+    text-color:        inherit;
+}
+button selected {
+    background-color:  @color7;
+    text-color:        @background;
+}
+
+/*****----- Message Box -----*****/
+message {
+    margin:            4px;
+    background-color:  transparent;
+}
+textbox {
+    padding:           12px;
+    border-radius:     10px;
+    background-color:  @color2;
+    text-color:        @foreground;
+}
+error-message {
+    padding:           12px;
+    border-radius:     10px;
+    border: 2px;
+    border-color: @urgent;
+    background-color:  @background;
+    text-color:        @urgent;
+}
