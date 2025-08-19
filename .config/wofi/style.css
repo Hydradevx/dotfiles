@@ -1,0 +1,28 @@
+* {
+    background-color: #1e1e2e;
+    color: #cdd6f4;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-family: "FiraCode", monospace;
+}
+
+window {
+    background-color: #1e1e2e;
+    border: 2px solid #89b4fa;
+    border-radius: 12px;
+}
+
+element {
+    padding: 6px 10px;
+    margin: 2px 0;
+    border-radius: 6px;
+}
+
+element:selected {
+    background-color: #89b4fa;
+    color: #1e1e2e;
+}
+
+icon {
+    margin-right: 10px;
+}

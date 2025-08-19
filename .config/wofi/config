@@ -1,0 +1,11 @@
+[general]
+width=300
+lines=10
+columns=1
+location=center
+show-icons=true
+icon-size=24
+font=FiraCode 12
+theme=custom
+blur-background=true
+blur-strength=15
