@@ -1,51 +1,65 @@
 * {
-	background-image: none;
-	box-shadow: none;
+    background-image: none;
+    font-size: 20px;
+    font-family: "JetBrains Mono NFM";
 }
 
+@import '../../.config/waybar/colors.css';
+
 window {
-	background-color: rgba(30, 30, 46, 0.90);
+    background-color: rgba(17, 17, 17, 0.45)
 }
 
 button {
-	border-radius: 0;
-	border-color: #94e2d5;
-	text-decoration-color: #cdd6f4;
-	color: #cdd6f4;
-	background-color: #181825;
-	border-style: solid;
-	border-width: 1px;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: 25%;
+    border-radius: 20px;
+    margin: 10px;
+    color: @inverse_surface;
+    border-color: @inverse_surface;
+    background-color: rgba(0, 0, 0, 0.5);
+    outline-style: none;
+    border-style: solid;
+	border-width: 0px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20%;
+    box-shadow: none;
+    text-shadow: none;
+    animation: gradient_f 20s ease-in infinite;
 }
 
-button:focus, button:active, button:hover {
-	/* 20% Overlay 2, 80% mantle */
-	background-color: rgb(48, 50, 66);
-	outline-style: none;
+button:hover,button:focus {
+    background-color: @on_secondary_fixed_variant;
+    background-size: 30%;
+    animation: gradient_f 20s ease-in infinite;
+    transition: all 0.3s cubic-bezier(.55,0.0,.28,1.682);
 }
+
+/* Adjust the size of the icon or content inside the button */
+button span {
+    font-size: 1.2em; /* Increase the font size */
+}
+
 
 #lock {
-    background-image: url("~/.config/wlogout/icons/lock.svg");
+    background-image: image(url("./icons/lock.svg"));
 }
 
 #logout {
-    background-image: url("~/.config/wlogout/icons/logout.svg");
+    background-image: image(url("./icons/logout.svg"));
 }
 
 #suspend {
-    background-image: url("~/.config/wlogout/icons/suspend.svg");
-}
-
-#hibernate {
-    background-image: url("~/.config/wlogout/icons/hibernate.svg");
+    background-image: image(url("./icons/suspend.svg"));
 }
 
 #shutdown {
-    background-image: url("~/.config/wlogout/icons/shutdown.svg");
+    background-image: image(url("./icons/shutdown.svg"));
 }
 
 #reboot {
-    background-image: url("~/.config/wlogout/icons/reboot.svg");
+    background-image: image(url("./icons/reboot.svg"));
+}
+
+#hibernate {
+    background-image: image(url("./icons/hibernate.svg"));
 }
