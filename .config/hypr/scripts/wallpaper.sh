@@ -2,28 +2,24 @@
 
 WALLPAPER_DIR="$HOME/Pictures/wallpapers"
 
-# Make sure swww daemon is running
-if ! pgrep -x "swww-daemon" > /dev/null; then
-    swww-daemon &
-    sleep 0.5
-fi
-
-# Pick a random wallpaper (only jpg/png/webp)
+# Pick a random wallpaper (jpg/png/webp)
 RANDOM_WALL=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) | shuf -n1)
 
-# Set wallpaper with smooth transition & quality options
-swww img "$RANDOM_WALL" \
-    --transition-type any \
-    --transition-fps 60 \
-    --transition-duration 2 \
-    --resize crop \
-    --fill-color "#000000"
-    
-# Generate colors with pywal
-wal -i "$WALLPAPER_DIR/$RANDOM_WALL" -n -q
+# Kill existing hyprpaper (to reload config)
+pkill hyprpaper
 
-# Copy generated colors into Waybar
-cp ~/.cache/wal/colors-waybar.css ~/.config/waybar/colors.css
+# Write new hyprpaper config
+cat > ~/.config/hypr/hyprpaper.conf <<EOF
+preload = $RANDOM_WALL
+wallpaper = Virtual-1,$RANDOM_WALL
+splash = false
+EOF
 
-# Reload waybar
+# Restart hyprpaper
+hyprpaper &
+
+# Generate colors with Matugen
+matugen image "$RANDOM_WALL" --apply gtk waybar
+
+# Reload waybar (so new colors apply)
 pkill -SIGUSR2 waybar
