@@ -14,9 +14,6 @@ if [ -n "$RANDOM_WALL" ]; then
     # Generate colors with Matugen
     matugen image "$RANDOM_WALL"
     
-    # Reload waybar (so new colors apply)
-    pkill -SIGUSR2 waybar
-    
     echo "Wallpaper set: $RANDOM_WALL"
 else
     echo "No wallpapers found in $WALLPAPER_DIR"

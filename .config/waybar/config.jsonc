@@ -1,119 +1,46 @@
+/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
+
+/* My Mostly Used waybar config incase you wonder :) */
 {
-        "layer": "top",
-        "position": "top",
-        "reload_style_on_change": true,
-        "modules-left": ["custom/notification","clock","custom/pacman","tray"],
-        "modules-center": ["hyprland/workspaces"],
-        "modules-right": ["group/expand","network","battery"],
+"include": [
+  "$HOME/.config/waybar/Modules",
+  "$HOME/.config/waybar/ModulesWorkspaces",
+  "$HOME/.config/waybar/ModulesCustom",
+  "$HOME/.config/waybar/ModulesGroups",
+  "$HOME/.config/waybar/UserModules",
+  ],
+"layer": "bottom",
+//"mode": "dock",
+"exclusive": true,
+"passthrough": false,
+"position": "top",
+"spacing": 3,
+"fixed-center": true,
+"ipc": true,
+"margin-top": 3,
+"margin-left": 8,
+"margin-right": 8,
 
+"modules-left": [
+	"idle_inhibitor",
+	"custom/separator#blank",
+	"clock",
+	"custom/separator#blank",
+	"tray",
+	],
 
-        "hyprland/workspaces": {
-            "format": "{icon}",
-            "format-icons": {
-                "active": "",
-                "default": "",
-                "empty": ""
-            },
-            "persistent-workspaces": {
-                "*": [ 1,2,3,4,5 ]
-            }
-        },
-        "custom/notification": {
-            "tooltip": false,
-            "format": "",
-            "on-click": "swaync-client -t -sw",
-            "escape": true
-        },
-        "clock": {
-            "format": "{:%I:%M:%S %p} ",
-            "interval": 1,   
-            "tooltip-format": "<tt>{calendar}</tt>",
-            "calendar": {
-                "format": {
-                    "today": "<span color='#fAfBfC'><b>{}</b></span>"
-                }
-            },
-            "actions": {
-                "on-click-right": "shift_down",
-                "on-click": "shift_up"
-            }
-        },
-        "network": {
-            "format-wifi": "",
-            "format-ethernet":"",
-            "format-disconnected": "",
-            "tooltip-format-disconnected": "Error",
-            "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-            "tooltip-format-ethernet": "{ifname} 🖧 ",
-            "on-click": "kitty nmtui"
-        },
-        "battery": {
-            "interval":30,
-            "states": {
-                "good": 95,
-                "warning": 30,
-                "critical": 20
-            },
-            "format": "{capacity}% {icon}",
-            "format-charging": "{capacity}% 󰂄",
-            "format-plugged": "{capacity}% 󰂄 ",
-            "format-alt": "{time} {icon}",
-            "format-icons": [
-                "󰁻",
-            "󰁼",
-            "󰁾",
-            "󰂀",
-            "󰂂",
-            "󰁹"
-            ],
-        },
-        "custom/pacman": {
-            "format": "󰅢 {}",
-            "interval": 30,   
-            "exec": "checkupdates | wc -l",
-            "exec-if": "exit 0",
-            "on-click": "kitty sh -c 'yay -Syu; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar",
-            "signal": 8,
-            "tooltip": false,
-        },
-        "custom/expand": {
-            "format": "",
-            "tooltip": false
-        },
-        "custom/endpoint":{
-            "format": "|",
-            "tooltip": false
-        },
-        "group/expand": {
-            "orientation": "horizontal",
-            "drawer": {
-                "transition-duration": 600,
-                "transition-to-left": true,
-                "click-to-reveal": true
-            },
-            "modules": ["custom/expand", "custom/colorpicker","cpu","memory","temperature","custom/endpoint"],
-        },
-        "custom/colorpicker": {
-            "format": "{}",
-            "return-type": "json",
-            "interval": "once",
-            "exec": "~/.config/waybar/scripts/colorpicker.sh -j",
-            "on-click": "~/.config/waybar/scripts/colorpicker.sh",
-            "signal": 1
-        },
-        "cpu": {
-            "format": "󰻠",
-            "tooltip": true
-        },
-        "memory": {
-            "format": ""
-        },
-        "temperature": {
-            "critical-threshold": 80,
-            "format": "",
-        },
-        "tray": {
-            "icon-size": 14,
-            "spacing": 10
-        },
-} 
+"modules-center": [
+	"hyprland/workspaces#kanji",
+	],
+
+"modules-right": [
+    "mpris",
+    "custom/separator#dot-line",
+    "group/notify",	
+	"battery",
+	"custom/separator#blank",  
+	"group/audio",
+	"custom/separator#blank",
+	"custom/power",
+	],
+}
