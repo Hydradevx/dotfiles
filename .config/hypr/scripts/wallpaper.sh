@@ -1,6 +1,7 @@
 #!/bin/bash
 
 WALLPAPER_DIR="$HOME/Pictures/wallpapers"
+SYMLINK_PATH="$HOME/.config/hypr/current_wallpaper"
 
 # Initialize swww if not running
 if ! pgrep -x "swww-daemon" > /dev/null; then
@@ -12,9 +13,14 @@ RANDOM_WALL=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg"
 
 if [ -n "$RANDOM_WALL" ]; then
     # Generate colors with Matugen
-    matugen image "$RANDOM_WALL"   --config ~/.config/matugen/config.toml --no-cache
+    matugen image "$RANDOM_WALL"
 
     ~/.config/hypr/scripts/sync_starship.sh
+
+    SELECTED_PATH="$WALLPAPER_DIR/$RANDOM_WALL"
+
+    mkdir -p "$(dirname "$SYMLINK_PATH")"
+    ln -sf "$SELECTED_PATH" "$SYMLINK_PATH"
     
     echo "Wallpaper set: $RANDOM_WALL"
 else
