@@ -30,17 +30,14 @@
 	],
 
 "modules-center": [
-	"hyprland/workspaces#kanji",
+	"hyprland/workspaces#roman",
 	],
 
 "modules-right": [
-    "mpris",
-    "custom/separator#dot-line",
     "group/notify",	
 	"battery",
 	"custom/separator#blank",  
 	"group/audio",
 	"custom/separator#blank",
-	"custom/power",
 	],
 }
