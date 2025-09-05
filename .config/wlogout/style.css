@@ -34,7 +34,6 @@ button:hover,button:focus {
     transition: all 0.3s cubic-bezier(.55,0.0,.28,1.682);
 }
 
-/* Adjust the size of the icon or content inside the button */
 button span {
     font-size: 1.2em; /* Increase the font size */
 }
