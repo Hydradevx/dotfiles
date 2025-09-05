@@ -12,7 +12,9 @@ RANDOM_WALL=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg"
 
 if [ -n "$RANDOM_WALL" ]; then
     # Generate colors with Matugen
-    matugen image "$RANDOM_WALL"
+    matugen image "$RANDOM_WALL"   --config ~/.config/matugen/config.toml --no-cache
+
+    ~/.config/hypr/scripts/sync_starship.sh
     
     echo "Wallpaper set: $RANDOM_WALL"
 else

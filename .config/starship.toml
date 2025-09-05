@@ -1,0 +1,98 @@
+# Use custom format
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$git_state\
+$git_metrics\
+$package\
+$docker_context\
+$dotnet\
+$golang\
+$java\
+$nodejs\
+$python\
+$ruby\
+$rust\
+$terraform\
+$nix_shell\
+$conda\
+$memory_usage\
+$env_var\
+$custom\
+$cmd_duration\
+$line_break\
+$character"""
+
+# Add newline before prompt
+add_newline = false
+
+# Prompt character
+[character]
+success_symbol = "[❯](bold #b7c4ff)"
+error_symbol = "[❯](bold #ffb4ab)"
+vicmd_symbol = "[❮](bold #c2c5dd)"
+
+# Directory settings
+[directory]
+truncation_length = 3
+truncate_to_repo = false
+style = "bold #dce1ff"
+format = "[$path]($style)"
+
+# Git branch
+[git_branch]
+symbol = "🌱 "
+style = "bold #e4bada"
+format = "[$symbol$branch]($style)"
+
+# Username
+[username]
+style_user = "bold #b7c4ff"
+style_root = "bold #ffb4ab"
+format = "[$user]($style)@"
+
+# Hostname
+[hostname]
+ssh_symbol = "🌐 "
+style = "bold #c2c5dd"
+format = "[$hostname]($style) in "
+
+# Package version (if applicable)
+[package]
+format = "[$version]($style)"
+style = "bold #dee1f9"
+
+# Node.js
+[nodejs]
+format = "[🟢 $version](bold green) "
+
+# Python
+[python]
+format = "[🐍 $version](bold yellow) "
+
+# Rust
+[rust]
+format = "[🦀 $version](bold red) "
+
+# Golang
+[golang]
+format = "[🐹 $version](bold cyan) "
+
+# Memory usage
+[memory_usage]
+format = "[[$symbol$usage]($style)]"
+style = "bold #90909a"
+
+# Command duration
+[cmd_duration]
+format = "[⏱ $duration]($style)"
+style = "bold #45464f"
+
+# Custom sections for your rice
+[custom.time]
+command = "date +%H:%M"
+when = true
+format = "[🕒 $output](bold #8A63FF)"

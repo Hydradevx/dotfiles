@@ -30,6 +30,7 @@ PROMPT='%F{cyan}➜ %F{yellow}%1~%f '
 autoload -U colors && colors
 setopt prompt_subst
 
+eval "$(starship init zsh)"
 # -----------------------
 # Run neofetch at startup
 # -----------------------
