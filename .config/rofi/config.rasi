@@ -1,220 +1,186 @@
-/* ---- 🎨 Custom Rofi Theme: Blue-Purple Glow ---- */
-/* Inspired by JaKooLit / Adi1090x configs */
+@theme "/dev/null"
+@import "colors.rasi"
 
-/*****----- Configuration -----*****/
 configuration {
-    modi:                       "drun,run,window";
-    show-icons:                 true;
-    display-drun:               " Apps";
-    display-run:                " Run";
-    display-window:             " Window";
-    drun-display-format:        "{name}";
-    window-format:              "{w} · {c} · {t}";
-    hover-select:               true;
-    me-select-entry:            "MouseSecondary";
-    me-accept-entry:            "MousePrimary";
+	modi: "window,run,drun";
+	display-drun: "Applications";
+	display-window: "Windows";
+	display-run: "Run";
+	drun-display-format: "{icon} {name}";
+	font: "JetBrainsMono Nerd Font 10";
+	show-icons: true;
+	icon-theme: "Colloid";
 }
 
-/*****----- Colors (Blue-Purple Palette) -----*****/
-/* Replace wallust with static theme colors */
-* {
-    background:        #0d0d17;   /* deep night */
-    foreground:        #dfe6f7;   /* soft white */
-    color0:            #12121f;   /* darkest */
-    color1:            #1c1c2e;   /* bg-alt */
-    color2:            #3a2f59;   /* purple shadow */
-    color3:            #4c3c72;   /* dim purple */
-    color4:            #5d4c99;   /* medium purple */
-    color5:            #7a5cd0;   /* brighter purple */
-    color6:            #3a6fc0;   /* blue */
-    color7:            #56aaff;   /* bright blue */
-    color8:            #9b6bdf;   /* glow purple */
-    color9:            #b48ef0;   /* lavender */
-    color10:           #8fbcff;   /* light blue */
-    color11:           #6ab4ff;   /* cyan-blue */
-    color12:           #ff9bf0;   /* pink accent */
-    urgent:            #ff4971;   /* hot pink red */
-
-    border-color:      @color7;
-    selected:          @color7;
-    active:            @color5;
-    handle-color:      @color6;
-
-    /* Text coloring */
-    normal-background: @background;
-    normal-foreground: @foreground;
-    selected-normal-background: @selected;
-    selected-normal-foreground: @background;
-    urgent-background: @urgent;
-    urgent-foreground: @background;
-    active-background: @active;
-    active-foreground: @background;
-}
-
-/*****----- Window -----*****/
 window {
-    transparency:      "real";
-    location:          center;
-    anchor:            center;
-    fullscreen:        false;
-    width:             38%;
-    x-offset:          0px;
-    y-offset:          0px;
+    /* properties for window widget */
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       1000px;
+    x-offset:                    0px;
+    y-offset:                    0px;
 
-    margin:            0px;
-    padding:           0px;
-    border:            2px solid;
-    border-radius:     18px;
-    border-color:      @border-color;
-    cursor:            "default";
-    background-color: @color2;
-    text-color:        @foreground;
+    /* properties for all widgets */
+    enabled:                     true;
+    border:			 2px solid;
+    border-color:		 @secondary-container;
+    border-radius:               15px;
+    cursor:                      "default";
+    background-color:            @on-primary-fixed;
 }
 
-/*****----- Main Box -----*****/
 mainbox {
-    spacing:           12px;
-    margin:            0px;
-    padding:           24px;
-    border:            0px solid;
-    border-radius:     0px;
-    background-color:  rgba(13, 13, 23, 0.85);
-    children:          [ "inputbar", "message", "custombox" ];
+    enabled:                     true;
+    spacing:                     0px;
+    background-color:            transparent;
+    orientation:                 horizontal;
+    children:                    [ "imagebox", "listbox" ];
 }
 
-/*****----- Custom Box -----*****/
-custombox {
-    spacing:           0px;
-    background-color:  @color1;
-    text-color:        @foreground;
-    orientation:       horizontal;
-    children:          [ "mode-switcher", "listview" ];
+imagebox {
+    padding:                     20px;
+    background-color:            transparent;
+    background-image:            url("~/.config/hypr/current_wallpaper", height);
+    orientation:                 vertical;
+    children:                    [ "inputbar", "dummy", "mode-switcher" ];
 }
 
-/*****----- Inputbar -----*****/
+listbox {
+    spacing:                     20px;
+    padding:                     20px;
+    background-color:            transparent;
+    orientation:                 vertical;
+    children:                    [ "message", "listview" ];
+}
+
+dummy {
+    background-color:            transparent;
+}
+
 inputbar {
-    spacing:           12px;
-    padding:           10px 16px;
-    border-radius:     12px;
-    border:            2px solid;
-    border-color:      @border-color;
-    background-color:  @color1;
-    text-color:        @foreground;
-    children:          [ "textbox-prompt-colon", "entry" ];
+    enabled:                     true;
+    spacing:                     10px;
+    padding:                     15px;
+    border-radius:               10px;
+    background-color:		 @on-primary;
+    text-color:			 @on-surface;
+    children:                    [ "textbox-prompt-colon", "entry" ];
 }
 textbox-prompt-colon {
-    str:               " 🔎";
-    padding:           4px;
-    expand:            false;
-    text-color:        @color7;
+    enabled:                     true;
+    expand:                      false;
+    str:                         "  ";
+    background-color:            inherit;
+    text-color:                  inherit;
 }
 entry {
-    padding:           6px;
-    background-color:  @color1;
-    text-color:        @foreground;
-    placeholder:       "Search apps…";
-    placeholder-color: @color9;
-    cursor:            text;
+    enabled:                     true;
+    background-color:            inherit;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "Search";
+    placeholder-color:           inherit;
 }
 
-/*****----- Listview -----*****/
-listview {
-    columns:           1;
-    lines:             8;
-    cycle:             true;
-    dynamic:           true;
-    scrollbar:         false;
-    layout:            vertical;
-    fixed-height:      true;
-    fixed-columns:     true;
-
-    spacing:           8px;
-    padding:           12px;
-    border:            0px;
-    background-color:  transparent;
-}
-scrollbar {
-    handle-width:      4px;
-    handle-color:      @handle-color;
-    border-radius:     12px;
-}
-
-/*****----- Elements (Apps) -----*****/
-element {
-    spacing:           8px;
-    padding:           12px;
-    border-radius:     10px;
-    background-color:  transparent;
-    cursor:            pointer;
-    text-color:        @foreground;
-}
-element normal.normal {
-    background-color:  transparent;
-}
-element normal.urgent {
-    background-color:  @urgent;
-}
-element normal.active {
-    background-color:  rgba(122,92,208,0.3);
-}
-
-element-text selected,
-element selected.normal {
-    background-color:  @color7;
-    text-color:        @background;
-}
-element selected.urgent {
-    background-color:  @urgent;
-}
-element selected.active {
-    background-color:  @color5;
-}
-element-icon {
-    background-color:  transparent;
-    text-color:        inherit;
-}
-element-text {
-    text-color:        inherit;
-    vertical-align:    0.5;
-}
-
-/*****----- Mode Switcher -----*****/
-mode-switcher {
-    orientation:       vertical;
-    spacing:           0px;
-    padding:           4px;
-    border-radius:     12px;
-    background-color:  @color1;
-    text-color:        @foreground;
+mode-switcher{
+    enabled:                     true;
+    spacing:                     20px;
+    background-color:            transparent;
+    text-color:                  @primary-fixed;
 }
 button {
-    padding:           8px 20px;
-    border-radius:     8px;
-    background-color:  transparent;
-    cursor:            pointer;
-    text-color:        inherit;
+    padding:                     15px;
+    border-radius:               10px;
+    background-color:            @on-primary;
+    text-color:                  inherit;
+    cursor:                      pointer;
 }
 button selected {
-    background-color:  @color7;
-    text-color:        @background;
+    background-color:            @primary;
+    text-color:                  @on-secondary;
 }
 
-/*****----- Message Box -----*****/
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       8;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    spacing:                     10px;
+    background-color:            transparent;
+    text-color:                  @on-surface;
+    cursor:                      "default";
+}
+
+element {
+    enabled:                     true;
+    spacing:                     15px;
+    padding:                     8px;
+    border-radius:               10px;
+    background-color:            transparent;
+    text-color:                  @on-surface;
+    cursor:                      pointer;
+}
+element normal.normal {
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+element normal.urgent {
+    background-color:            @error;
+    text-color:                  @on-surface;
+}
+element normal.active {
+    background-color:            @primary;
+    text-color:                  @on-surface;
+}
+element selected.normal {
+    background-color:            @primary;
+    text-color:                  @on-secondary;
+}
+element selected.urgent {
+    background-color:            @error;
+    text-color:                  @on-secondary;
+}
+element selected.active {
+    background-color:            @error;
+    text-color:                  @on-secondary;
+}
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    size:                        32px;
+    cursor:                      inherit;
+}
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+
 message {
-    margin:            4px;
-    background-color:  transparent;
+    background-color:            transparent;
 }
 textbox {
-    padding:           12px;
-    border-radius:     10px;
-    background-color:  @color2;
-    text-color:        @foreground;
+    padding:                     15px;
+    border-radius:               10px;
+    background-color:            @on-primary;
+    text-color:                  @on-surface;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
 }
 error-message {
-    padding:           12px;
-    border-radius:     10px;
-    border: 2px;
-    border-color: @urgent;
-    background-color:  @background;
-    text-color:        @urgent;
+    padding:                     15px;
+    border-radius:               20px;
+    background-color:            @on-primary;
+    text-color:                  @on-surface;
 }
