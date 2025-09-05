@@ -16,7 +16,7 @@ This document contains the finalized list of technologies and tools for my Hyprl
 ---
 
 ## 🔔 Notifications
-- **Mako** → Lightweight Wayland notification daemon  
+- **Swaync** → Lightweight Wayland notification daemon  
 
 ---
 

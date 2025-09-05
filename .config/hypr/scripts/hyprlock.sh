@@ -1,3 +1,2 @@
 #!/bin/bash
-
-wlogout
+hyprlock
