@@ -15,8 +15,6 @@ if [ -n "$RANDOM_WALL" ]; then
     # Generate colors with Matugen
     matugen image "$RANDOM_WALL"
 
-    ~/.config/hypr/scripts/sync_starship.sh
-
     SELECTED_PATH="$WALLPAPER_DIR/$RANDOM_WALL"
 
     mkdir -p "$(dirname "$SYMLINK_PATH")"
