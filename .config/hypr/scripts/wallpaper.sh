@@ -1,7 +1,9 @@
 #!/bin/bash
 
+# === CONFIG ===
 WALLPAPER_DIR="$HOME/Pictures/wallpapers"
 SYMLINK_PATH="$HOME/.config/hypr/current_wallpaper"
+
 
 # Initialize swww if not running
 if ! pgrep -x "swww-daemon" > /dev/null; then
@@ -14,18 +16,19 @@ if command -v swaync >/dev/null 2>&1; then
     swaync-client -rs
 fi
 
-RANDOM_WALL=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) | shuf -n1)
+cd "$WALLPAPER_DIR" || exit 1
 
-if [ -n "$RANDOM_WALL" ]; then
-    # Generate colors with Matugen
-    matugen image "$RANDOM_WALL"
+# === handle spaces name
+IFS=$'\n'
 
-    SELECTED_PATH="$WALLPAPER_DIR/$RANDOM_WALL"
+# === ICON-PREVIEW SELECTION WITH ROFI, SORTED BY NEWEST ===
+SELECTED_WALL=$(for a in $(ls -t *.jpg *.png *.gif *.jpeg 2>/dev/null); do echo -en "$a\0icon\x1f$a\n"; done | rofi -dmenu -p "")
+[ -z "$SELECTED_WALL" ] && exit 1
+SELECTED_PATH="$WALLPAPER_DIR/$SELECTED_WALL"
 
-    mkdir -p "$(dirname "$SYMLINK_PATH")"
-    ln -sf "$SELECTED_PATH" "$SYMLINK_PATH"
-    
-    echo "Wallpaper set: $RANDOM_WALL"
-else
-    echo "No wallpapers found in $WALLPAPER_DIR"
-fi
+# === SET WALLPAPER ===
+matugen image "$SELECTED_PATH"
+
+# === CREATE SYMLINK ===
+mkdir -p "$(dirname "$SYMLINK_PATH")"
+ln -sf "$SELECTED_PATH" "$SYMLINK_PATH"
