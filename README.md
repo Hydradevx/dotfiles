@@ -8,7 +8,7 @@ A one-command installation script for my Hyprland desktop environment rice. This
 
 ### Direct curl to bash 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/Hydradevx/dotfiles/install/main.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/Hydradevx/dotfiles/refs/heads/main/install/main.sh)
 ```
 
 ## 📋 Prerequisites
