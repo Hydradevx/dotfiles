@@ -37,7 +37,7 @@ export RICE_DEPS=(
 )
 
 export AUR_DEPS=(
-    # Add any AUR-specific packages here if needed
+    python-pywalfox
 )
 
 # Colors for output

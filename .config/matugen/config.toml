@@ -32,3 +32,8 @@ post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings s
 [templates.qt5ct]
 input_path = '~/.config/matugen/templates/qtct-colors.conf'
 output_path = '~/.config/qt5ct/colors/matugen.conf'
+
+[templates.pywalfox]
+input_path = '~/.config/matugen/templates/pywalfox-colors.json'
+output_path = '~/.cache/wal/colors.json'
+post_hook = 'pywalfox update'
