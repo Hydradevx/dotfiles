@@ -29,6 +29,8 @@ SELECTED_PATH="$WALLPAPER_DIR/$SELECTED_WALL"
 # === SET WALLPAPER ===
 matugen image "$SELECTED_PATH"
 
+notify-send "Wallpaper changed to $SELECTED_WALL"
+
 # === CREATE SYMLINK ===
 mkdir -p "$(dirname "$SYMLINK_PATH")"
 ln -sf "$SELECTED_PATH" "$SYMLINK_PATH"
