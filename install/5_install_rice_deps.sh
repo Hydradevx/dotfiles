@@ -17,4 +17,6 @@ fi
 run_cmd "gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Dark'"
 run_cmd "gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'"
 
+run_cmd "cd ~ && git clone --depth 1 https://github.com/VandalByte/darkmatter-grub2-theme.git && cd darkmatter-grub2-theme && sudo python3 darkmatter-theme.py --install"
+
 log_success "All rice dependencies installed"

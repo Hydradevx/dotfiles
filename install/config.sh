@@ -34,11 +34,13 @@ export RICE_DEPS=(
     noto-fonts
     noto-fonts-emoji
     stow
+    python
 )
 
 export AUR_DEPS=(
     python-pywalfox
     vesktop
+    visual-studio-code-bin
 )
 
 # Colors for output
