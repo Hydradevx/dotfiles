@@ -15,12 +15,9 @@ export HYPR_DEPS=(
     kitty
     swww
     swaync
-    wlogout
     hyprlock
     sddm
-    neofetch
     starship
-    matugen
     qt5ct
 )
 
@@ -41,6 +38,9 @@ export AUR_DEPS=(
     python-pywalfox
     vesktop
     visual-studio-code-bin
+    matugen-bin
+    wlogout
+    neofetch
 )
 
 # Colors for output
