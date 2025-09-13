@@ -38,6 +38,7 @@ export RICE_DEPS=(
 
 export AUR_DEPS=(
     python-pywalfox
+    vesktop
 )
 
 # Colors for output
