@@ -22,10 +22,8 @@ export HYPR_DEPS=(
 )
 
 export RICE_DEPS=(
-    arc-gtk-theme
     papirus-icon-theme
     ttf-jetbrains-mono
-    ttf-maple
     ttf-nerd-fonts-symbols
     ttf-font-awesome
     noto-fonts
@@ -41,6 +39,8 @@ export AUR_DEPS=(
     matugen-bin
     wlogout
     neofetch
+    arc-gtk-theme
+    maplemono-nf
 )
 
 # Colors for output
