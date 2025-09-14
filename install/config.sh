@@ -19,6 +19,7 @@ export HYPR_DEPS=(
     sddm
     starship
     qt5ct
+    neovim
 )
 
 export RICE_DEPS=(
