@@ -42,6 +42,8 @@ export AUR_DEPS=(
     neofetch
     arc-gtk-theme
     maplemono-nf
+    spotify
+    spicetify-cli
 )
 
 # Colors for output

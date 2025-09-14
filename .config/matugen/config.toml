@@ -41,3 +41,8 @@ post_hook = 'pywalfox update'
 [templates.vesktop]
 input_path = '~/.config/matugen/templates/midnight-discord.css'
 output_path = '~/.config/vesktop/themes/midnight-discord.css'
+
+[templates.cava]
+input_path = '~/.config/matugen/templates/cava-colors.ini'
+output_path = '~/.config/cava/themes/hydra'
+post_hook = "pkill -USR1 cava"
