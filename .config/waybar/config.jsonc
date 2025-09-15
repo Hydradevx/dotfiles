@@ -26,18 +26,24 @@
 	"custom/separator#blank",
 	"clock",
 	"custom/separator#blank",
+	"custom/cava",
+	"custom/separator#blank",
 	"tray",
 	],
 
 "modules-center": [
-	"hyprland/workspaces#roman",
+	"hyprland/workspaces#kanji",
 	],
 
 "modules-right": [
-    "group/notify",	
-	"battery",
+  "group/notify",	
+	"cpu",
 	"custom/separator#blank",  
-	"group/audio",
+	"disk",
+	"custom/separator#blank",  
+	"memory",
+	"custom/separator#blank",  
+	"network",
 	"custom/separator#blank",
 	"custom/power"
 	],

@@ -67,6 +67,7 @@ tooltip label{
 /*-----modules indv----*/
 #taskbar button,
 #workspaces button {
+	font-family: "Noto Sans CJK JP", "JetBrainsMono Nerd Font", sans-serif;
 	color: @outline;
     box-shadow: none;
 	  text-shadow: none;
