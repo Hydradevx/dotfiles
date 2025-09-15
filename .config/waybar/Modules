@@ -202,14 +202,18 @@
 },
 
 "idle_inhibitor": {
-	"tooltip": true,
-	"tooltip-format-activated": "Idle_inhibitor active",
-	"tooltip-format-deactivated": "Idle_inhibitor not active",
-	"format": "{icon}",
-	"format-icons": {
-		"activated": " ",
-		"deactivated": " ",
-	}
+    "tooltip": true,
+    "tooltip-format-activated": "Hypridle paused 󰀃",
+    "tooltip-format-deactivated": "Hypridle running",
+    "format": "{icon}",
+    "format-icons": {
+			"activated": "\udb80\udd76",
+      "deactivated": "\udb81\udeca"
+    },
+    "exec": "if pgrep -x 'hypridle' > /dev/null; then echo 'deactivated'; else echo 'activated'; fi",
+    "interval": 5,
+    "on-click": "if pgrep -x 'hypridle' > /dev/null; then pkill -x 'hypridle'; else hypridle &; fi",
+    "on-click-right": "pkill -x 'hypridle'; hypridle &"
 },
 
 "keyboard-state": {

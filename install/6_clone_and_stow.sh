@@ -30,4 +30,9 @@ done
 
 chmod +x "$HOME/.config/hypr/scripts/hyprlock.sh"
 
+run_cmd "git clone https://github.com/Hydradevx/Wallpaper-Bank ~/Pictures/wallpapers"
+run_cmd "cd ~ && git clone --depth 1 https://github.com/VandalByte/darkmatter-grub2-theme.git && cd darkmatter-grub2-theme && sudo python3 darkmatter-theme.py --install"
+run_cmd "sh -c "$(curl -fsSL https://raw.githubusercontent.com/keyitdev/sddm-astronaut-theme/master/setup.sh)""
+run_cmd "curl -fsSL https://raw.githubusercontent.com/NYRI4/Comfy-spicetify/main/install.sh | sh"
+
 log_success "Dotfiles stowed successfully"

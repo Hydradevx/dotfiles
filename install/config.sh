@@ -16,6 +16,7 @@ export HYPR_DEPS=(
     swww
     swaync
     hyprlock
+    hypridle
     sddm
     starship
     qt5ct
@@ -44,6 +45,7 @@ export AUR_DEPS=(
     maplemono-nf
     spotify
     spicetify-cli
+    obs-studio
 )
 
 # Colors for output

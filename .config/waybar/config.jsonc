@@ -24,7 +24,7 @@
 "modules-left": [
 	"idle_inhibitor",
 	"custom/separator#blank",
-	"clock",
+	"clock#2",
 	"custom/separator#blank",
 	"custom/cava",
 	"custom/separator#blank",
