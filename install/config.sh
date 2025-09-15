@@ -21,6 +21,9 @@ export HYPR_DEPS=(
     starship
     qt5ct
     neovim
+    grim
+    slurp
+    swappy
 )
 
 export RICE_DEPS=(
