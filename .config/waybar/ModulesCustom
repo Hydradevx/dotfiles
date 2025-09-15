@@ -69,6 +69,14 @@
 	"tooltip-format": "Check KooL Dots update\nIf available",
 },
 
+"custom/cava": {
+    "exec": "~/.config/waybar/scripts/cava.sh",
+    "format": "♪ {}",
+    "on-click-middle": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "on-click-left": "playerctl previous"
+},
+
 // Hypridle inhibitor
 "custom/hypridle": {
 	"format": "󱫗 ",
