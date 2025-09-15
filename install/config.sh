@@ -39,7 +39,7 @@ export AUR_DEPS=(
     visual-studio-code-bin
     matugen-bin
     wlogout
-    neofetch
+    fastfetch
     arc-gtk-theme
     maplemono-nf
     spotify

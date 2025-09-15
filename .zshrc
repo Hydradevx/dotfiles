@@ -35,4 +35,4 @@ eval "$(starship init zsh)"
 # -----------------------
 # Run neofetch at startup
 # -----------------------
-neofetch
+fastfetch

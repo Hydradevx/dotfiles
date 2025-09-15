@@ -1,0 +1,87 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+  
+  "logo": {
+    "type": "small",
+    "source": "",
+    "padding": {
+      "right": 2
+    },
+    "printRemaining": true,
+    "position": "left"
+  },
+  
+  "display": {
+    "stat": false,
+    "separator": "  ",
+    "brightColor": true,
+    "key": {
+      "width": 0
+    }
+  },
+  
+  "general": {
+    "thread": true,
+    "processingTimeout": 1000
+  },
+  
+  "modules": [
+    {
+      "type": "title",
+      "key": " ",
+      "keyIcon": ""
+    },
+    {
+      "type": "separator",
+      "string": "-"
+    },
+    {
+      "type": "os",
+      "keyIcon": ""
+    },
+    {
+      "type": "host",
+      "keyIcon": "󰌢"
+    },
+    {
+      "type": "kernel",
+      "keyIcon": ""
+    },
+    {
+      "type": "uptime",
+      "keyIcon": ""
+    },
+    {
+      "type": "packages",
+      "keyIcon": "󰏖"
+    },
+    {
+      "type": "shell",
+      "keyIcon": ""
+    },
+    {
+      "type": "de",
+      "keyIcon": ""
+    },
+    {
+      "type": "wm",
+      "keyIcon": ""
+    },
+    {
+      "type": "memory",
+      "keyIcon": ""
+    },
+    {
+      "type": "break"
+    },
+    {
+      "type": "colors",
+      "key": " ",
+      "keyIcon": "",
+      "symbol": "block",
+      "block": {
+        "width": 3
+      }
+    }
+  ]
+}
