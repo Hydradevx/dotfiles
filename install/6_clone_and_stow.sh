@@ -28,4 +28,6 @@ for dir in */; do
     fi
 done
 
+chmod +x "$HOME/.config/hypr/scripts/hyprlock.sh"
+
 log_success "Dotfiles stowed successfully"
