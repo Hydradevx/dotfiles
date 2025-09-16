@@ -7,3 +7,4 @@
 .config/rofi/colors.rasi
 .config/waybar/colors.css
 .config/starship.toml
+.config/btop/themes/matugen.theme
