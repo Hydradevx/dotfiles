@@ -6,9 +6,12 @@ A one-command installation script for my Hyprland desktop environment rice. This
 
 **Warning:** This script will overwrite existing configurations. Please back up your important files before proceeding.
 
-### Direct curl to bash 
+### Run the following commands in your terminal:
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/Hydradevx/dotfiles/refs/heads/main/install/main.sh)
+git clone https://github.com/Hydradevx/dotfiles.git ~/dotfiles
+cd ~/dotfiles/install
+chmod +x main.sh
+./main.sh
 ```
 
 ## 📋 Prerequisites
