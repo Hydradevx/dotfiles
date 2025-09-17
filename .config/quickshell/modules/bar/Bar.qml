@@ -1,107 +1,30 @@
+// modules/bar/Bar.qml
 import "../common"
-
-
-
 import QtQuick
-
-
 import QtQuick.Controls
-
-
 import QtQuick.Layouts
-
-
 import Quickshell
 
-
-
-
-
 Scope {
-
-
     Variants {
-
-
         model: Quickshell.screens
 
-
-
-
-
         PanelWindow {
-
-
             property var modelData
-
-
-
-
-
             screen: modelData
-
-
             height: 40
-
-
-            color: Appearance.colors.colLayer0
-
-
-
-
-
-            // Left section
-
+            color: Appearance.colLayer0
 
             RowLayout {
-
-
                 anchors.left: parent.left
-
-
             }
 
-
-
-
-
-            // Middle section
-
-
             RowLayout {
-
-
-                anchors.top: parent.top
-
-
-                anchors.bottom: parent.top
-
-
                 anchors.centerIn: parent
-
-
-
-
-
-                // Rectangle {
-
-
-                    
-
-
-                // }
-
-
-
-
-
                 ClockWidget {
-
-
-                   Layout.fillHeight: true
-
-
-                 }
+                    Layout.fillHeight: true
+                    color: Appearance.colOnLayer0
+                }
             }
 
             RowLayout {
