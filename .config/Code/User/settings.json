@@ -16,7 +16,7 @@
   // Workbench
   "workbench.startupEditor": "newUntitledFile",
   "workbench.list.smoothScrolling": true,
-  "workbench.iconTheme": "symbols",
+  "workbench.iconTheme": "file-icons",
   "workbench.colorTheme": "Catppuccin Mocha",
   "workbench.editor.labelFormat": "short",
   "workbench.editor.empty.hint": "hidden",
