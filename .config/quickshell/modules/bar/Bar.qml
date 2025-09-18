@@ -14,6 +14,11 @@ PanelWindow {
         right: true
     }
 
+    ArchLogo {
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+    }
+
     Clock {
         anchors.centerIn: parent
     }
