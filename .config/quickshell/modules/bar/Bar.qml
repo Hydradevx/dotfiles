@@ -22,4 +22,9 @@ PanelWindow {
     Clock {
         anchors.centerIn: parent
     }
+
+    PowerButton {
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+    }
 }

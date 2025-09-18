@@ -3,13 +3,13 @@ import "../public" as Theme
 import Quickshell.Io
 
 Text {
-    id: archLogo
-    text: ""
-    font.pixelSize: 30
+    id: powerBtn
+    text: ""
+    font.pixelSize: 24
     font.family: "JetBrainsMono Nerd Font"
     color: Theme.Colors.on_surface
     anchors.verticalCenter: parent.verticalCenter
-    leftPadding: 10
+    rightPadding: 10
 
     MouseArea {
         anchors.fill: parent
@@ -17,8 +17,8 @@ Text {
         cursorShape: Qt.PointingHandCursor
 
         onClicked: {
-            var proc = Qt.createQmlObject('import Quickshell.Io; Process {}', archLogo)
-            proc.command = ["rofi", "-show", "drun"]
+            var proc = Qt.createQmlObject('import Quickshell.Io; Process {}', powerBtn)
+            proc.command = ["wlogout"]
             proc.running = true
         }
     }
