@@ -16,7 +16,7 @@
   // Workbench
   "workbench.startupEditor": "newUntitledFile",
   "workbench.list.smoothScrolling": true,
-  "workbench.iconTheme": "file-icons",
+  "workbench.iconTheme": "symbols",
   "workbench.colorTheme": "Catppuccin Mocha",
   "workbench.editor.labelFormat": "short",
   "workbench.editor.empty.hint": "hidden",
@@ -159,5 +159,11 @@
   },
   "git.autofetch": true,
   "remote.autoForwardPortsSource": "hybrid",
-  "svelte.enable-ts-plugin": true
+  "svelte.enable-ts-plugin": true,
+  "qt-core.additionalQtPaths": [
+    {
+      "name": "Qt-5.15.17-linux-g++_from_PATH",
+      "path": "/usr/bin/qmake"
+    }
+  ]
 }
