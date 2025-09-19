@@ -8,3 +8,4 @@
 .config/waybar/colors.css
 .config/starship.toml
 .config/btop/themes/matugen.theme
+.config/quickshell/.qmlls.ini
