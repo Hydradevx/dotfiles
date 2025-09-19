@@ -1,52 +1,45 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 import Quickshell.Io
 import Quickshell.Hyprland
-import Quickshell.Io
+import Quickshell.Widgets
 import Quickshell
 import "../public" as Theme
 
 Scope {
     id: performanceScope
+    
     PanelWindow {
-        id: perfPopup
-        visible: false
-        width: 480
-        height: 200
+    id: perfPopup
+    visible: false
+    implicitWidth: 500
+    implicitHeight: 220
 
-        Rectangle {
-    id: popup
-    width: 400
-    height: 200
-    radius: 12
-    color: Theme.Colors.surface
-    border.color: Theme.Colors.outline
-    border.width: 1
-
-    Row {
-        anchors.centerIn: parent
-        spacing: 20
+    RowLayout {
+        anchors.fill: parent
+        anchors.margins: 20
+        spacing: 30
 
         PerfCircle {
-            label: "CPU"
-            command: "top -bn1 | grep 'Cpu(s)' | awk '{print $2 + $4}'"
-            suffix: "%"
+            sublabel1: "CPU"
+            sublabel2: "Usage"
+            command1: "top -bn1 | grep 'Cpu(s)' | awk '{print $2 + $4}'"
         }
 
         PerfCircle {
-            label: "RAM"
-            command: "free | awk '/Mem/ {printf(\"%.0f\", $3/$2 * 100)}'"
-            suffix: "%"
+            sublabel1: "RAM"
+            sublabel2: "Usage"
+            command1: "free | awk '/Mem/ {printf(\"%.0f\", $3/$2 * 100)}'"
         }
 
         PerfCircle {
-            label: "Disk"
-            command: "df -h / | awk 'NR==2 {print $5}'"
-            suffix: ""
+            sublabel1: "Disk"
+            sublabel2: "Usage"
+            command1: "df -h / | awk 'NR==2 {print $5}' | tr -d '%'"
         }
     }
-    }
-    }
+}
 
     IpcHandler {
     target: "performance"
