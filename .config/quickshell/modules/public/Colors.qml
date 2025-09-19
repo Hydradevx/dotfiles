@@ -8,7 +8,8 @@ Singleton {
 
     FileView {
         id: file
-        path: "/home/hydra/.local/state/quickshell/user/generated/colors.json"
+        // try to use environment variables if possible to make sure that your code runs on other people computers
+        path: `${Quickshell.env("HOME")}/.local/state/quickshell/user/generated/colors.json`
         watchChanges: true
         onFileChanged: reload()
         onAdapterUpdated: writeAdapter()

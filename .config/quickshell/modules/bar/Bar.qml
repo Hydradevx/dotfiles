@@ -7,7 +7,7 @@ PanelWindow {
     id: bar
     implicitHeight: 32
     screen: Quickshell.screens[0]
-    color: Theme.Colors.surface   
+    color: Theme.Colors.surface
 
     anchors {
         top: true
