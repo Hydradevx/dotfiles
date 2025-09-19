@@ -7,8 +7,10 @@ import "../public/"
 Item {
     id: perfOverlay
     visible: Opener.perfOpenerOpen
-    width: parent.width
+    implicitWidth: 480
     height: Opener.perfOpenerOpen ? 200 : 0
+    anchors.centerIn: parent
+
     Rectangle {
         anchors.fill: parent
         color: "#1e1e2e"
