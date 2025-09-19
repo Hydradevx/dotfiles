@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import "../public" as Theme
 import "../performance"
+import "../spotify"
 
 PanelWindow {
     id: bar
@@ -35,6 +36,14 @@ PanelWindow {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
     }
+
+    SpotifyIcon {
+        id: spotifyIcon
+        anchors.right: perfIcon.left
+        anchors.rightMargin: 12
+        anchors.verticalCenter: parent.verticalCenter
+    }
+
 
     PerfIcon {
         id: perfIcon
