@@ -9,10 +9,6 @@ Item {
     visible: Opener.perfOpenerOpen
     width: parent.width
     height: Opener.perfOpenerOpen ? 200 : 0
-    MouseArea {
-        anchors.fill: parent
-        onClicked: console.log("I can receive click events")
-    }
     Rectangle {
         anchors.fill: parent
         color: "#1e1e2e"
