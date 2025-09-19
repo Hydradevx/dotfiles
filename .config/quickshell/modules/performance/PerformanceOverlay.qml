@@ -13,7 +13,6 @@ Item {
         anchors.fill: parent
         onClicked: console.log("I can receive click events")
     }
-
     Rectangle {
         anchors.fill: parent
         color: "#1e1e2e"
@@ -24,7 +23,6 @@ Item {
         Column {
             anchors.centerIn: parent
             spacing: 8
-
             Text {
                 text: "CPU: 12%"
                 color: "#a6e3a1"
