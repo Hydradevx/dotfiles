@@ -11,7 +11,7 @@ Row {
         id: timeText
         color: Theme.Colors.on_surface
         font.pixelSize: 14
-        font.family: "JetBrainsMono Nerd Font"
+        font.family: "Maple Mono NF"
         text: Qt.formatDateTime(new Date(), "HH:mm")
 
         Timer {
@@ -26,7 +26,7 @@ Row {
         id: dateText
         color: Theme.Colors.on_surface_variant
         font.pixelSize: 14
-        font.family: "JetBrainsMono Nerd Font"
+        font.family: "Maple Mono NF"
         text: Qt.formatDateTime(new Date(), "ddd, dd MMM")
 
         Timer {

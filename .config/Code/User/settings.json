@@ -35,7 +35,7 @@
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.smoothScrolling": true,
   "editor.parameterHints.enabled": true,
-  "editor.fontFamily": "Maple Mono",
+  "editor.fontFamily": "Maple Mono NF",
   "editor.fontLigatures": true,
   "editor.acceptSuggestionOnCommitCharacter": true,
   "editor.accessibilitySupport": "off",

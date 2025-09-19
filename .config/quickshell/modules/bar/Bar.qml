@@ -7,7 +7,7 @@ PanelWindow {
     id: bar
     implicitHeight: 32
     screen: Quickshell.screens[0]
-    color: Theme.Colors.surface   
+    color: Theme.Colors.surface
 
     anchors {
         top: true
@@ -16,15 +16,28 @@ PanelWindow {
     }
 
     ArchLogo {
+        id: archLogo
         anchors.left: parent.left
+        width: 32
+        height: 40
+    }
+
+    Workspaces {
+        id: ws
+        anchors.left: archLogo.right
+        anchors.leftMargin: 8       // space between logo and workspaces
         anchors.verticalCenter: parent.verticalCenter
+        implicitWidth: 120
+        implicitHeight: 32
     }
 
     Clock {
-        anchors.centerIn: parent
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
     }
 
     PerfIcon {
+        id: perfIcon
         anchors.right: powerBtn.left
         anchors.rightMargin: 12
         anchors.verticalCenter: parent.verticalCenter
