@@ -11,7 +11,7 @@ Item {
 
     Text {
         text: "󰓅" 
-        font.pixelSize: 20
+        font.pixelSize: 28
         font.family: "JetBrainsMono Nerd Font"
         color: Theme.Colors.on_surface
         anchors.centerIn: parent

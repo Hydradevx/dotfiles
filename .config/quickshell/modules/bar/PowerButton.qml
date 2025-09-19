@@ -11,15 +11,16 @@ Text {
     anchors.verticalCenter: parent.verticalCenter
     rightPadding: 10
 
+    Process {
+        id: wlogoutProcess
+        command: ["wlogout"]
+    }
+
     MouseArea {
         anchors.fill: parent
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
 
-        onClicked: {
-            var proc = Qt.createQmlObject('import Quickshell.Io; Process {}', powerBtn)
-            proc.command = ["wlogout"]
-            proc.running = true
-        }
+        onClicked: wlogoutProcess.running = true
     }
 }

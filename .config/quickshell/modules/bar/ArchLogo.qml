@@ -11,15 +11,16 @@ Text {
     anchors.verticalCenter: parent.verticalCenter
     leftPadding: 10
 
+    Process {
+        id: rofiProcess
+        command: ["rofi", "-show", "drun"]
+    }
+
     MouseArea {
         anchors.fill: parent
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
 
-        onClicked: {
-            var proc = Qt.createQmlObject('import Quickshell.Io; Process {}', archLogo)
-            proc.command = ["rofi", "-show", "drun"]
-            proc.running = true
-        }
+        onClicked: rofiProcess.running = true
     }
 }
