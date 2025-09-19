@@ -3,10 +3,9 @@ import "modules/bar"
 import "modules/performance"
 
 Scope {
-    Bar { }
+    Bar { id: bar }
 
     PerformanceOverlay {
-    id: perfOverlay
-    anchors.top: bar.bottom     
+        id: perfOverlay
+    }
 }
-}   
