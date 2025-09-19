@@ -12,7 +12,6 @@ Scope {
             required property ShellScreen modelData
             // if you don't set this to transparent you wont be able to see your screen
             color: "transparent"
-            exclusionMode: ExclusionMode.Ignore
 
             anchors {
                 top: true
@@ -23,7 +22,7 @@ Scope {
 
             mask: Region {
                 x: 0
-                y: bar.height
+                y: 0
                 width: rootPanel.width
                 height: rootPanel.height
                 intersection: Intersection.Xor
