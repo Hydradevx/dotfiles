@@ -24,7 +24,15 @@ PanelWindow {
         anchors.centerIn: parent
     }
 
+    PerfIcon {
+        anchors.right: powerBtn.left
+        anchors.rightMargin: 12
+        anchors.verticalCenter: parent.verticalCenter
+        onTogglePopup: perfPopup.visible = !perfPopup.visible
+    }
+
     PowerButton {
+        id: powerBtn
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
     }
