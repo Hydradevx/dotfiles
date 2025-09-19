@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import "../public" as Theme
+import "../performance"
 
 PanelWindow {
     id: bar
