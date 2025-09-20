@@ -16,14 +16,6 @@ PopupWindow {
     anchor.rect.x: bar.width / 2 - width / 2
     anchor.rect.y: bar.height
 
-    // Close on Esc
-    Keys.onReleased: (event) => {
-        if (event.key === Qt.Key_Escape) {
-            musicPopup.visible = false
-            event.accepted = true
-        }
-    }
-
     Rectangle {
         anchors.fill: parent
         color: Theme.Colors.surface

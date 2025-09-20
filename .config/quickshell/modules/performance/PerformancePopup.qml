@@ -4,12 +4,16 @@ import QtQuick.Layouts
 import Quickshell
 import "../public" as Theme
 
-PanelWindow {
+PopupWindow {
     id: perfPopup
     visible: false
     implicitWidth: 600
     implicitHeight: 220
     color: "transparent" 
+
+    anchor.window: bar
+    anchor.rect.x: bar.width / 2 - width / 2
+    anchor.rect.y: bar.height
     
     Rectangle {
         anchors.fill: parent
