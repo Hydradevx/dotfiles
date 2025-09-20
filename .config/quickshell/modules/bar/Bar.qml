@@ -2,7 +2,7 @@ import QtQuick
 import Quickshell
 import "../public" as Theme
 import "../performance"
-import "../spotify"
+import "../music"
 
 PanelWindow {
     id: bar
@@ -37,11 +37,12 @@ PanelWindow {
         anchors.verticalCenter: parent.verticalCenter
     }
 
-    SpotifyIcon {
-        id: spotifyIcon
+    MusicIcon {
+        id: musicIcon
         anchors.right: perfIcon.left
         anchors.rightMargin: 12
         anchors.verticalCenter: parent.verticalCenter
+        onTogglePopup: musicPopup.visible = !musicPopup.visible
     }
 
 

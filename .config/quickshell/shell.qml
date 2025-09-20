@@ -1,7 +1,7 @@
 import Quickshell
 import "modules/bar"
 import "modules/performance"
-import "modules/spotify"
+import "modules/music"
 
 Scope {
     Bar { id: bar }
@@ -10,8 +10,7 @@ Scope {
         id: perfPopup
     }
 
-    Spotify {
-        id: spotify
+    MusicPopup {
+        id: musicPopup
     }
-
 }
