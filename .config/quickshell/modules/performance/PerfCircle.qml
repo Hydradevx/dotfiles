@@ -8,8 +8,9 @@ Item {
     width: 140
     height: 140
 
-    property string command1: ""
-    property string command2: ""
+    // New unified mainLabel for external JSON updates
+    property string mainLabel: ""
+
     property real value1: 0
     property real value2: 0
     property string label1: ""
@@ -23,52 +24,11 @@ Item {
     property color bg1: Theme.Colors.surface_variant
     property color bg2: Theme.Colors.outline
 
-    Process {
-        id: proc1
-        command: ["bash", "-c", res.command1]
-        stdout: StdioCollector {
-            id: out1
-            onStreamFinished: {
-                const parsed = parseFloat(text);
-                if (!isNaN(parsed)) {
-                    res.value1 = parsed / 100;
-                    res.label1 = `${Math.round(parsed)}%`;
-                    canvas.requestPaint();
-                }
-            }
-        }
-    }
-
-    Process {
-        id: proc2
-        command: ["bash", "-c", res.command2]
-        stdout: StdioCollector {
-            id: out2
-            onStreamFinished: {
-                const parsed = parseFloat(text);
-                if (!isNaN(parsed)) {
-                    res.value2 = parsed / 100;
-                    res.label2 = `${Math.round(parsed)}%`;
-                    canvas.requestPaint();
-                }
-            }
-        }
-    }
-
-    Timer {
-        interval: 2000
-        running: true
-        repeat: true
-        onTriggered: {
-            if (command1 !== "") proc1.running = true;
-            if (command2 !== "") proc2.running = true;
-        }
-    }
-
     Column {
         anchors.centerIn: parent
         spacing: 4
-        Text { text: label1; font.pixelSize: 18; color: Theme.Colors.on_surface; horizontalAlignment: Text.AlignHCenter }
+        // Show mainLabel if set, else fallback to label1
+        Text { text: res.mainLabel !== "" ? res.mainLabel : label1; font.pixelSize: 18; color: Theme.Colors.on_surface; horizontalAlignment: Text.AlignHCenter }
         Text { text: sublabel1; font.pixelSize: 12; color: Theme.Colors.on_surface_variant; horizontalAlignment: Text.AlignHCenter }
     }
 

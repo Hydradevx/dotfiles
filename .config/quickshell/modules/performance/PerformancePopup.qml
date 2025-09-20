@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Io
 import "../public" as Theme
 
 PopupWindow {
@@ -9,12 +10,12 @@ PopupWindow {
     visible: false
     implicitWidth: 600
     implicitHeight: 220
-    color: "transparent" 
+    color: "transparent"
 
     anchor.window: bar
     anchor.rect.x: bar.width / 2 - width / 2
     anchor.rect.y: bar.height
-    
+
     Rectangle {
         anchors.fill: parent
         color: Theme.Colors.surface
@@ -29,21 +30,47 @@ PopupWindow {
         spacing: 30
 
         PerfCircle {
+            id: cpuCircle
             sublabel1: "CPU"
             sublabel2: "Usage"
-            command1: "top -bn1 | grep 'Cpu(s)' | awk '{print $2 + $4}'"
         }
 
         PerfCircle {
+            id: ramCircle
             sublabel1: "RAM"
             sublabel2: "Usage"
-            command1: "free | awk '/Mem/ {printf(\"%.0f\", $3/$2 * 100)}'"
         }
 
         PerfCircle {
+            id: diskCircle
             sublabel1: "Disk"
             sublabel2: "Usage"
-            command1: "df -h / | awk 'NR==2 {print $5}' | tr -d '%'"
         }
+    }
+
+    // One single process for all metrics
+    Process {
+        id: perfProc
+        command: ["hydractl", "perf"]
+        running: false
+        stdout: StdioCollector {
+            onStreamFinished: {
+                try {
+                    var data = JSON.parse(this.text.trim())
+                    cpuCircle.mainLabel = data.cpu + "%"
+                    ramCircle.mainLabel = data.ram + "%"
+                    diskCircle.mainLabel = data.disk + "%"
+                } catch(e) {
+                    console.log("hydractl perf parse error", e, "RAW OUTPUT:", this.text)
+                }
+            }
+        }
+    }
+
+    Timer {
+        interval: 2000
+        running: true
+        repeat: true
+        onTriggered: perfProc.running = true
     }
 }

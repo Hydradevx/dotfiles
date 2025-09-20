@@ -112,7 +112,7 @@ PopupWindow {
     // Status process 
     Process {
         id: statusProc
-        command: ["hydractl", "status"]
+        command: ["hydractl", "music", "status"]
         running: false
         stdout: StdioCollector {
             onStreamFinished: {
@@ -130,9 +130,9 @@ PopupWindow {
         }
     }
 
-    Process { id: playPauseProc; command: ["hydractl", "play-pause"] }
-    Process { id: nextProc; command: ["hydractl", "next"] }
-    Process { id: prevProc; command: ["hydractl", "previous"] }
+    Process { id: playPauseProc; command: ["hydractl", "music", "play-pause"] }
+    Process { id: nextProc; command: ["hydractl", "music", "next"] }
+    Process { id: prevProc; command: ["hydractl", "music", "previous"] }
 
     Timer {
         interval: 2000
