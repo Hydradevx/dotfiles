@@ -4,7 +4,7 @@
     font-family: "JetBrains Mono NFM";
 }
 
-@import '../../.config/waybar/colors.css';
+@import './colors.css';
 
 window {
     background-color: rgba(17, 17, 17, 0.45)

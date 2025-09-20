@@ -35,7 +35,7 @@
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.smoothScrolling": true,
   "editor.parameterHints.enabled": true,
-  "editor.fontFamily": "Maple Mono",
+  "editor.fontFamily": "Maple Mono NF",
   "editor.fontLigatures": true,
   "editor.acceptSuggestionOnCommitCharacter": true,
   "editor.accessibilitySupport": "off",
@@ -159,5 +159,11 @@
   },
   "git.autofetch": true,
   "remote.autoForwardPortsSource": "hybrid",
-  "svelte.enable-ts-plugin": true
+  "svelte.enable-ts-plugin": true,
+  "qt-core.additionalQtPaths": [
+    {
+      "name": "Qt-5.15.17-linux-g++_from_PATH",
+      "path": "/usr/bin/qmake"
+    }
+  ]
 }
