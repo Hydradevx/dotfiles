@@ -5,12 +5,24 @@ import Quickshell
 import "../public" as Theme
 import Quickshell.Io
 
-PanelWindow {
+PopupWindow {
     id: musicPopup
     visible: false
-    implicitWidth: 600
-    implicitHeight: 180
+    width: 600
+    height: 180
     color: "transparent"
+
+    anchor.window: bar
+    anchor.rect.x: bar.width / 2 - width / 2
+    anchor.rect.y: bar.height
+
+    // Close on Esc
+    Keys.onReleased: (event) => {
+        if (event.key === Qt.Key_Escape) {
+            musicPopup.visible = false
+            event.accepted = true
+        }
+    }
 
     Rectangle {
         anchors.fill: parent
@@ -73,7 +85,6 @@ PanelWindow {
             Layout.alignment: Qt.AlignHCenter
 
             Button {
-                font.pixelSize: 18
                 Layout.preferredWidth: 50
                 background: Rectangle { color: Theme.Colors.primary; radius: 6 }
                 contentItem: Text { text: "⏮"; anchors.centerIn: parent; color: Theme.Colors.surface; font.pixelSize: 18 }
@@ -82,16 +93,22 @@ PanelWindow {
 
             Button {
                 id: playPauseBtn
-                text: "▶"
-                font.pixelSize: 14
+                text: ""
                 Layout.preferredWidth: 50
                 background: Rectangle { color: Theme.Colors.primary; radius: 6 }
-                contentItem: Text { text: playPauseBtn.text; anchors.centerIn: parent; color: Theme.Colors.surface; font.pixelSize: 18 }
-                onClicked: playPauseProc.running = true
+                contentItem: Text {
+                    text: playPauseBtn.text
+                    anchors.centerIn: parent
+                    color: Theme.Colors.surface
+                    font.pixelSize: 18
+                }
+                onClicked: {
+                    playPauseProc.running = true
+                    statusProc.running = true 
+                }
             }
 
             Button {
-                font.pixelSize: 18
                 Layout.preferredWidth: 50
                 background: Rectangle { color: Theme.Colors.primary; radius: 6 }
                 contentItem: Text { text: "⏭"; anchors.centerIn: parent; color: Theme.Colors.surface; font.pixelSize: 18 }
@@ -112,7 +129,16 @@ PanelWindow {
                     trackTitle.text = parts[0] || "No Track"
                     trackArtist.text = parts[1] || "Unknown"
                     albumArt.source = parts[2] || ""
-                    playPauseBtn.text = (parts[3] === "Playing") ? "⏸" : "▶"
+                    switch (parts[3]) {
+                        case "Playing":
+                            playPauseBtn.text = "⏸";
+                            break;
+                        case "Paused":
+                        case "Stopped":
+                        default:
+                            playPauseBtn.text = "▶";
+                            break;
+                    }
                 } catch(e) {
                     console.log("playerctl parse error", e)
                 }
