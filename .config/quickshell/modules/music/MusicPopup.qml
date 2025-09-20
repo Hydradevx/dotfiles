@@ -8,8 +8,8 @@ import Quickshell.Io
 PopupWindow {
     id: musicPopup
     visible: false
-    width: 600
-    height: 180
+    implicitWidth: 600
+    implicitHeight: 180
     color: "transparent"
 
     anchor.window: bar
