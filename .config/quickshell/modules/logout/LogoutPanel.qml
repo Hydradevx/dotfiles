@@ -26,14 +26,6 @@ PanelWindow {
         Keys.onPressed: event => {
             if (event.key === Qt.Key_Escape) {
                 logoutPanel.visible = false
-            } else {
-                for (let i = 0; i < buttonModel.length; i++) {
-                    let btn = buttonModel[i]
-                    if (event.text === btn.keybind) {
-                        runCommand(btn.action)
-                        logoutPanel.visible = false
-                    }
-                }
             }
         }
 
@@ -42,39 +34,39 @@ PanelWindow {
             onClicked: logoutPanel.visible = false
         }
 
-        ColumnLayout {
-            id: contentColumn
+        RowLayout {
+            id: contentRow
             anchors.centerIn: parent
-            spacing: 12
-            width: 300
+            spacing: 40
 
             Repeater {
                 model: buttonModel
 
                 delegate: Rectangle {
-                    width: parent.width
-                    height: 50
-                    radius: 8
-                    color: Theme.Colors.surface
+                    width: 100
+                    height: 100
+                    radius: 50
+                    color: hovered ? Theme.Colors.primary : Theme.Colors.surface
                     border.color: Theme.Colors.outline
+
+                    property bool hovered: false
 
                     MouseArea {
                         anchors.fill: parent
                         hoverEnabled: true
+                        onEntered: parent.hovered = true
+                        onExited: parent.hovered = false
                         onClicked: {
                             runCommand(modelData.action)
                             logoutPanel.visible = false
                         }
                     }
 
-                    RowLayout {
-                        anchors.fill: parent
-                        anchors.margins: 10
-                        spacing: 12
-
-                        Text { text: modelData.text; font.pixelSize: 16; color: Theme.Colors.on_surface }
-                        Item { Layout.fillWidth: true }
-                        Text { text: "(" + modelData.keybind + ")"; font.pixelSize: 14; color: Theme.Colors.on_surface_variant }
+                    Text {
+                        anchors.centerIn: parent
+                        text: modelData.icon
+                        font.pixelSize: 40
+                        color: parent.hovered ? Theme.Colors.on_primary : Theme.Colors.on_surface
                     }
                 }
             }
@@ -82,12 +74,12 @@ PanelWindow {
     }
 
     property var buttonModel: [
-        { text: "Lock", action: "$HOME/.config/hypr/scripts/hyprlock.sh", keybind: "l" },
-        { text: "Reboot", action: "systemctl reboot", keybind: "r" },
-        { text: "Shutdown", action: "systemctl poweroff", keybind: "s" },
-        { text: "Logout", action: "loginctl kill-session $XDG_SESSION_ID", keybind: "e" },
-        { text: "Suspend", action: "systemctl suspend", keybind: "u" },
-        { text: "Hibernate", action: "systemctl hibernate", keybind: "h" }
+        { icon: "", action: "$HOME/.config/hypr/scripts/hyprlock.sh" }, // Lock
+        { icon: "", action: "systemctl reboot" },                      // Reboot
+        { icon: "", action: "systemctl poweroff" },                    // Shutdown
+        { icon: "", action: "loginctl kill-session $XDG_SESSION_ID" }, // Logout
+        { icon: "", action: "systemctl suspend" },                     // Suspend
+        { icon: "󰒲", action: "systemctl hibernate" }                   // Hibernate
     ]
 
     function runCommand(cmd) {

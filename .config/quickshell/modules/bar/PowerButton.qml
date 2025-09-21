@@ -11,16 +11,11 @@ Text {
     anchors.verticalCenter: parent.verticalCenter
     rightPadding: 10
 
-    Process {
-        id: wlogoutProcess
-        command: ["wlogout"]
-    }
-
     MouseArea {
         anchors.fill: parent
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
 
-        onClicked: wlogoutProcess.running = true
+        onClicked: logoutPanel.visible = !logoutPanel.visible
     }
 }
