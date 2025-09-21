@@ -4,43 +4,52 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Notifications
 import Quickshell.Hyprland
+import Quickshell.Wayland
 import "../public" as Theme
-import "Notifs.qml" as Notifs
 
 PanelWindow {
     id: notifPanel
-    anchors.top: true
-    anchors.left: true
-    anchors.right: true
-    anchors.bottom: true
     visible: false
     color: "transparent"
+
+    property int margin: 20
+    property int widgetWidth: 320
+    implicitWidth: widgetWidth
+    implicitHeight: screen.height - margin * 2
+    anchors.right: true
+    anchors.bottom: true
+
+    WlrLayershell.layer: WlrLayer.Overlay
+    WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
+    exclusionMode: ExclusionMode.Ignore
 
     Rectangle {
         id: bg
         anchors.fill: parent
         color: Theme.Colors.surface_variant
-        opacity: 0.9
+        radius: 16
+        opacity: 0.95
 
         ColumnLayout {
+            id: mainColumn
             anchors.fill: parent
             anchors.margins: 16
             spacing: 12
 
-            // Header row
+            // Header
             RowLayout {
                 Layout.fillWidth: true
                 spacing: 8
 
                 Text {
                     text: "Notifications"
-                    font.pixelSize: 20
+                    font.pixelSize: 18
                     color: Theme.Colors.on_surface
                     Layout.fillWidth: true
                 }
 
                 Rectangle {
-                    radius: 6
+                    radius: 8
                     color: Theme.Colors.primary
                     width: 80
                     height: 28
@@ -55,15 +64,14 @@ PanelWindow {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            for (let i = Notifs.list.length - 1; i >= 0; i--) {
-                                Notifs.list[i].close()
+                            for (let i = notifs.list.count - 1; i >= 0; i--) {
+                                notifs.list.get(i).close()
                             }
                         }
                     }
                 }
             }
 
-            // Notification list
             Flickable {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -76,14 +84,15 @@ PanelWindow {
                     spacing: 10
 
                     Repeater {
-                        model: Notifs.list
+                        model: notifs.list
 
                         Rectangle {
                             required property Notification modelData
                             width: parent.width
-                            radius: 8
+                            radius: 12
                             color: Theme.Colors.surface
                             border.color: Theme.Colors.outline
+                            border.width: 1
 
                             Column {
                                 anchors.fill: parent
@@ -123,8 +132,8 @@ PanelWindow {
     }
 
     GlobalShortcut { 
-      name: "notificationToggle" 
-      description: "Toggles Notification Panel" 
-      onPressed: notifPanel.visible = !notifPanel.visible 
+        name: "notificationToggle" 
+        description: "Toggles Notification Panel" 
+        onPressed: notifPanel.visible = !notifPanel.visible 
     }
 }
