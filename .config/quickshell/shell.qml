@@ -4,6 +4,7 @@ import "modules/bar"
 import "modules/performance"
 import "modules/music"
 import "modules/logout"
+import "modules/notification"
 
 Scope {
     Bar { id: bar }
@@ -18,5 +19,9 @@ Scope {
 
     LogoutPanel {
         id: logoutPanel
+    }
+
+    NotificationPanel {
+        id: notifPanel
     }
 }
