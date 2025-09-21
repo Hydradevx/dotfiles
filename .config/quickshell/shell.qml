@@ -1,7 +1,11 @@
 import Quickshell
+import Quickshell.Hyprland
 import "modules/bar"
 import "modules/performance"
 import "modules/music"
+import "modules/logout"
+import "modules/notification"
+import "modules/power"
 
 Scope {
     Bar { id: bar }
@@ -12,5 +16,17 @@ Scope {
 
     MusicPopup {
         id: musicPopup
+    }
+
+    LogoutPanel {
+        id: logoutPanel
+    }
+
+    NotificationPanel {
+        id: notifPanel
+    }
+
+    BatteryPopup {
+        id: batteryPopup
     }
 }

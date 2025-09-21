@@ -8,8 +8,8 @@ import Quickshell.Io
 PopupWindow {
     id: musicPopup
     visible: false
-    width: 600
-    height: 180
+    implicitWidth: 600
+    implicitHeight: 180
     color: "transparent"
 
     anchor.window: bar
@@ -96,7 +96,7 @@ PopupWindow {
                 }
                 onClicked: {
                     playPauseProc.running = true
-                    statusProc.running = true 
+                    statusProc.running = true
                 }
             }
 
@@ -109,39 +109,30 @@ PopupWindow {
         }
     }
 
-    // Status process
+    // Status process 
     Process {
         id: statusProc
-        command: ["playerctl", "metadata", "--format", "{{title}}|||{{artist}}|||{{mpris:artUrl}}|||{{status}}"]
+        command: ["hydractl", "music", "status"]
         running: false
         stdout: StdioCollector {
             onStreamFinished: {
                 try {
-                    var parts = this.text.split("|||")
-                    trackTitle.text = parts[0] || "No Track"
-                    trackArtist.text = parts[1] || "Unknown"
-                    albumArt.source = parts[2] || ""
-                    switch (parts[3]) {
-                        case "Playing":
-                            playPauseBtn.text = "⏸";
-                            break;
-                        case "Paused":
-                        case "Stopped":
-                        default:
-                            playPauseBtn.text = "▶";
-                            break;
-                    }
+                    var data = JSON.parse(this.text.trim())
+                    trackTitle.text = data.title || "No Track"
+                    trackArtist.text = data.artist || "Unknown"
+                    albumArt.source = data.albumArt || ""
+
+                    playPauseBtn.text = data.playing ? "⏸" : "▶"
                 } catch(e) {
-                    console.log("playerctl parse error", e)
+                    console.log("hydractl parse error", e, this.text)
                 }
             }
         }
     }
 
-    // Control processes
-    Process { id: playPauseProc; command: ["playerctl", "play-pause"] }
-    Process { id: nextProc; command: ["playerctl", "next"] }
-    Process { id: prevProc; command: ["playerctl", "previous"] }
+    Process { id: playPauseProc; command: ["hydractl", "music", "play-pause"] }
+    Process { id: nextProc; command: ["hydractl", "music", "next"] }
+    Process { id: prevProc; command: ["hydractl", "music", "previous"] }
 
     Timer {
         interval: 2000

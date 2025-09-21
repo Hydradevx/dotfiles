@@ -3,6 +3,7 @@ import Quickshell
 import "../public" as Theme
 import "../performance"
 import "../music"
+import "../power"
 
 PanelWindow {
     id: bar
@@ -35,6 +36,14 @@ PanelWindow {
     Clock {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
+    }
+
+    BatteryIcon {
+        id: batteryIcon
+        anchors.right: musicIcon.left
+        anchors.rightMargin: 12
+        anchors.verticalCenter: parent.verticalCenter
+        onTogglePopup: batteryPopup.visible = !batteryPopup.visible
     }
 
     MusicIcon {

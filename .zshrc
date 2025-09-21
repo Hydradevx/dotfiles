@@ -24,6 +24,8 @@ alias c='code'
 # Show only "➜ <dir>"
 PROMPT='%F{cyan}➜ %F{yellow}%1~%f '
 
+export PATH="$HOME/.local/bin:$PATH"
+
 # -----------------------
 # Colors
 # -----------------------
