@@ -16,8 +16,8 @@
   // Workbench
   "workbench.startupEditor": "newUntitledFile",
   "workbench.list.smoothScrolling": true,
-  "workbench.iconTheme": "symbols",
-  "workbench.colorTheme": "Catppuccin Mocha",
+  "workbench.iconTheme": "a-file-icon-vscode",
+  "workbench.colorTheme": "Gruvbox Material Dark",
   "workbench.editor.labelFormat": "short",
   "workbench.editor.empty.hint": "hidden",
   "workbench.editor.editorActionsLocation": "default",
