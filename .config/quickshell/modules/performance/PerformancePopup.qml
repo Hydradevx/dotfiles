@@ -55,6 +55,10 @@ PopupWindow {
         running: false
         stdout: StdioCollector {
             onStreamFinished: {
+                if (this.text.trim() === "") {
+                    Qt.callLater(() => perfProc.running = true)
+                    return
+                }
                 try {
                     var data = JSON.parse(this.text.trim())
                     cpuCircle.mainLabel = data.cpu + "%"
@@ -72,5 +76,6 @@ PopupWindow {
         running: true
         repeat: true
         onTriggered: perfProc.running = true
+        Component.onCompleted: Qt.callLater(() => running = true)
     }
 }

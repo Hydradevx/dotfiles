@@ -8,108 +8,144 @@ import Quickshell.Io
 PopupWindow {
     id: musicPopup
     visible: false
-    implicitWidth: 600
-    implicitHeight: 180
+    implicitWidth: 500
+    implicitHeight: 160
     color: "transparent"
 
     anchor.window: bar
-    anchor.rect.x: bar.width / 2 - width / 2
+    anchor.rect.x: bar.width / 2 + bar.width / 2
     anchor.rect.y: bar.height
 
     Rectangle {
+        id: bg
         anchors.fill: parent
         color: Theme.Colors.surface
+        radius: 12
         border.color: Theme.Colors.outline
         border.width: 1
-        radius: 12
-    }
 
-    ColumnLayout {
-        anchors.fill: parent
-        anchors.margins: 15
-        spacing: 12
+        ColumnLayout {
+            anchors.fill: parent
+            anchors.margins: 16
+            spacing: 12
 
-        RowLayout {
-            spacing: 15
+            RowLayout {
+                spacing: 15
 
-            Rectangle {
-                width: 80
-                height: 80
-                radius: 6
-                border.color: Theme.Colors.outline
-                border.width: 1
-                clip: true
+                // Album art
+                Rectangle {
+                    width: 80
+                    height: 80
+                    radius: 8
+                    border.color: Theme.Colors.outline
+                    border.width: 1
+                    clip: true
 
-                Image {
-                    id: albumArt
-                    anchors.fill: parent
-                    source: ""
-                    fillMode: Image.PreserveAspectFit
+                    Image {
+                        id: albumArt
+                        anchors.fill: parent
+                        fillMode: Image.PreserveAspectFit
+                        source: ""
+                    }
+                }
+
+                ColumnLayout {
+                    spacing: 4
+                    Layout.alignment: Qt.AlignVCenter
+
+                    Text {
+                        id: trackTitle
+                        text: "No Track"
+                        font.pixelSize: 16
+                        font.bold: true
+                        color: Theme.Colors.on_surface
+                        elide: Text.ElideRight
+                    }
+
+                    Text {
+                        id: trackArtist
+                        text: "Unknown"
+                        font.pixelSize: 14
+                        color: Theme.Colors.on_surface_variant
+                        elide: Text.ElideRight
+                    }
                 }
             }
 
-            ColumnLayout {
-                spacing: 4
-                Layout.alignment: Qt.AlignVCenter
+            RowLayout {
+                spacing: 20
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
 
-                Text {
-                    id: trackTitle
-                    text: "No Track"
-                    font.pixelSize: 16
-                    font.bold: true
-                    color: Theme.Colors.on_surface
-                    elide: Text.ElideRight
+                // Previous
+                Rectangle {
+                    width: 40; height: 40; radius: 8
+                    color: Theme.Colors.primary
+                    border.color: Theme.Colors.outline
+                    border.width: 1
+
+                    Text {
+                        anchors.centerIn: parent
+                        text: "⏮"
+                        font.pixelSize: 18
+                        color: Theme.Colors.surface
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: prevProc.running = true
+                    }
                 }
 
-                Text {
-                    id: trackArtist
-                    text: "Unknown"
-                    font.pixelSize: 14
-                    color: Theme.Colors.on_surface
-                    elide: Text.ElideRight
+                // Play/Pause
+                Rectangle {
+                    id: playPauseBtnRect
+                    width: 40; height: 40; radius: 8
+                    color: Theme.Colors.primary
+                    border.color: Theme.Colors.outline
+                    border.width: 1
+
+                    Text {
+                        id: playPauseBtn
+                        anchors.centerIn: parent
+                        text: "▶"
+                        font.pixelSize: 18
+                        color: Theme.Colors.surface
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            playPauseProc.running = true
+                            statusProc.running = true
+                        }
+                    }
+                }
+
+                // Next
+                Rectangle {
+                    width: 40; height: 40; radius: 8
+                    color: Theme.Colors.primary
+                    border.color: Theme.Colors.outline
+                    border.width: 1
+
+                    Text {
+                        anchors.centerIn: parent
+                        text: "⏭"
+                        font.pixelSize: 18
+                        color: Theme.Colors.surface
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: nextProc.running = true
+                    }
                 }
             }
         }
-
-        RowLayout {
-            spacing: 20
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter
-
-            Button {
-                Layout.preferredWidth: 50
-                background: Rectangle { color: Theme.Colors.primary; radius: 6 }
-                contentItem: Text { text: "⏮"; anchors.centerIn: parent; color: Theme.Colors.surface; font.pixelSize: 18 }
-                onClicked: prevProc.running = true
-            }
-
-            Button {
-                id: playPauseBtn
-                text: ""
-                Layout.preferredWidth: 50
-                background: Rectangle { color: Theme.Colors.primary; radius: 6 }
-                contentItem: Text {
-                    text: playPauseBtn.text
-                    anchors.centerIn: parent
-                    color: Theme.Colors.surface
-                    font.pixelSize: 18
-                }
-                onClicked: {
-                    playPauseProc.running = true
-                    statusProc.running = true
-                }
-            }
-
-            Button {
-                Layout.preferredWidth: 50
-                background: Rectangle { color: Theme.Colors.primary; radius: 6 }
-                contentItem: Text { text: "⏭"; anchors.centerIn: parent; color: Theme.Colors.surface; font.pixelSize: 18 }
-                onClicked: nextProc.running = true
-            }
-        }
     }
 
-    // Status process 
+    // Status process
     Process {
         id: statusProc
         command: ["hydractl", "music", "status"]
@@ -117,11 +153,14 @@ PopupWindow {
         stdout: StdioCollector {
             onStreamFinished: {
                 try {
+                    if (this.text.trim() === "") {
+                        Qt.callLater(() => statusProc.running = true)
+                        return
+                    }
                     var data = JSON.parse(this.text.trim())
                     trackTitle.text = data.title || "No Track"
                     trackArtist.text = data.artist || "Unknown"
                     albumArt.source = data.albumArt || ""
-
                     playPauseBtn.text = data.playing ? "⏸" : "▶"
                 } catch(e) {
                     console.log("hydractl parse error", e, this.text)
@@ -139,5 +178,6 @@ PopupWindow {
         running: true
         repeat: true
         onTriggered: statusProc.running = true
+        Component.onCompleted: Qt.callLater(() => running = true)
     }
 }
