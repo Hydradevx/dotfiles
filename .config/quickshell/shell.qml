@@ -6,6 +6,7 @@ import "modules/music"
 import "modules/logout"
 import "modules/notification"
 import "modules/power"
+import "modules/app"
 
 Scope {
     Bar { id: bar }
@@ -28,5 +29,9 @@ Scope {
 
     BatteryPopup {
         id: batteryPopup
+    }
+
+    AppLauncher {
+        id: appLauncher
     }
 }
