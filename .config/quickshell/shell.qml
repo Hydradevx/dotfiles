@@ -10,6 +10,7 @@ import "modules/notification"
 import "modules/power"
 import "modules/app"
 import "modules/lock"
+import "modules/overview"
 
 Scope {
     Bar { id: bar }
@@ -76,4 +77,6 @@ Scope {
         description: "Toggles Lock Screen"
         onPressed: lock.locked = true;
     }
+
+    Overview { id: overview }
 }
