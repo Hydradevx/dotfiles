@@ -18,14 +18,15 @@ Rectangle {
         anchors.fill: parent
         source: "file:///home/hydra/.config/hypr/current_wallpaper"
         fillMode: Image.PreserveAspectCrop
-    }
 
-    MultiEffect {
-        anchors.fill: parent
-        source: wallpaper
-        blurEnabled: true
-        blur: 0.5
-        brightness: 0.9
+        layer.enabled: true
+        layer.effect: MultiEffect {
+            anchors.fill: parent
+            source: wallpaper
+            blurEnabled: true
+            blur: 0.4
+            brightness: 0.1
+        }
     }
 
     // Clock + Date
@@ -90,6 +91,7 @@ Rectangle {
                 padding: 12
                 font.pixelSize: 20
                 color: Theme.Colors.on_surface
+                placeholderText: "Enter your password"
 
                 background: Rectangle {
                     color: Theme.Colors.surfaceVariant
@@ -112,30 +114,6 @@ Rectangle {
                         passwordBox.text = root.context.currentText;
                     }
                 }
-            }
-
-            Button {
-								implicitWidth: 120
-                text: "Unlock"
-                padding: 12
-                font.pixelSize: 18
-								font.bold: true
-								font.family: "Maple Mono NF"
-                background: Rectangle {
-                    color: Theme.Colors.primary_container
-                    radius: 10
-                }
-                contentItem: Text {
-                    text: parent.Button.text
-                    font.pixelSize: 18
-                    color: Theme.Colors.on_primary_container
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                }
-
-                focusPolicy: Qt.NoFocus
-                enabled: !root.context.unlockInProgress && root.context.currentText !== ""
-                onClicked: root.context.tryUnlock()
             }
         }
 
