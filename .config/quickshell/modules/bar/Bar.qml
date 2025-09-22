@@ -29,6 +29,7 @@ PanelWindow {
         anchors.left: archLogo.right 
         anchors.leftMargin: 8       
         anchors.verticalCenter: parent.verticalCenter
+        implicitHeight: 32
     }
 
     Clock {
