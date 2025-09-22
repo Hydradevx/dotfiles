@@ -74,7 +74,7 @@ PanelWindow {
     }
 
     property var buttonModel: [
-        { icon: "", action: "$HOME/.config/hypr/scripts/hyprlock.sh" }, // Lock
+        { icon: "", action: "$HOME/.config/hypr/scripts/lock.sh" }, // Lock
         { icon: "", action: "systemctl reboot" },                      // Reboot
         { icon: "", action: "systemctl poweroff" },                    // Shutdown
         { icon: "", action: "loginctl kill-session $XDG_SESSION_ID" }, // Logout
