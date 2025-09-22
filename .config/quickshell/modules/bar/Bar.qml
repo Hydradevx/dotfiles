@@ -26,11 +26,9 @@ PanelWindow {
 
     Workspaces {
         id: ws
-        anchors.left: archLogo.right
-        anchors.leftMargin: 8       // space between logo and workspaces
+        anchors.left: archLogo.right 
+        anchors.leftMargin: 8       
         anchors.verticalCenter: parent.verticalCenter
-        implicitWidth: 120
-        implicitHeight: 32
     }
 
     Clock {
