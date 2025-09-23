@@ -2,18 +2,7 @@ package main
 
 import (
 	"fmt"
-	"os/exec"
-	"strings"
 )
-
-func runShellCommand(cmdline string) string {
-	cmd := exec.Command("bash", "-c", cmdline)
-	out, err := cmd.Output()
-	if err != nil {
-		return ""
-	}
-	return strings.TrimSpace(string(out))
-}
 
 func PerfStatus() {
 	cpu := runShellCommand(`top -bn1 | grep 'Cpu(s)' | awk '{print $2+$4}'`)
