@@ -13,16 +13,20 @@ Item {
     property bool isHovered: false
 
     Text {
+        id: iconText
         text: "󰓅" 
         font.pixelSize: 28
         font.family: "JetBrainsMono Nerd Font"
-        color: Theme.Colors.on_surface
+        color: isHovered ? Theme.Colors.primary : Theme.Colors.on_surface
         anchors.centerIn: parent
         
         scale: perfIcon.scaleFactor
         
         Behavior on scale {
             NumberAnimation { duration: 200; easing.type: Easing.OutBack }
+        }
+        Behavior on color {
+            ColorAnimation { duration: 200; easing.type: Easing.InOutQuad }
         }
 
         MouseArea {

@@ -14,10 +14,11 @@ Item {
     property bool isHovered: false
 
     Text {
-        text: "󰎆" // Nerd Font music note icon
+        id: iconText
+        text: "󰎆" 
         font.pixelSize: 28
         font.family: "JetBrainsMono Nerd Font"
-        color: Theme.Colors.on_surface
+        color: isHovered ? Theme.Colors.primary : Theme.Colors.on_surface
         anchors.centerIn: parent
         
         scale: musicIcon.scaleFactor
@@ -28,6 +29,9 @@ Item {
         }
         Behavior on rotation {
             NumberAnimation { duration: 300; easing.type: Easing.OutCubic }
+        }
+        Behavior on color {
+            ColorAnimation { duration: 200; easing.type: Easing.InOutQuad }
         }
 
         MouseArea {
