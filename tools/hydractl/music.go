@@ -24,8 +24,29 @@ func ensureSpotifyRunning() {
 	if err := cmd.Run(); err != nil {
 		fmt.Fprintln(os.Stderr, "No music player detected, starting Spotify...")
 		exec.Command("bash", "-c", "spotify &").Start()
-		time.Sleep(2 * time.Second)
+		time.Sleep(3 * time.Second)
 	}
+}
+
+func getCurrentPlayer() string {
+	players, err := runPlayerctl("--list-all")
+	if err != nil || players == "" {
+		return ""
+	}
+
+	playerList := strings.Split(players, "\n")
+	if len(playerList) == 0 {
+		return ""
+	}
+
+	// Prefer spotify if available
+	for _, player := range playerList {
+		if strings.Contains(strings.ToLower(player), "spotify") {
+			return player
+		}
+	}
+
+	return playerList[0]
 }
 
 func parseTime(timeStr string) float64 {
@@ -48,43 +69,74 @@ func parseTime(timeStr string) float64 {
 func MusicStatus() {
 	ensureSpotifyRunning()
 
+	player := getCurrentPlayer()
+	if player == "" {
+		j, _ := json.Marshal(Track{
+			Title:    "No player found",
+			Artist:   "Start a music player",
+			AlbumArt: "",
+			Playing:  false,
+			Status:   "Stopped",
+			Position: 0,
+			Length:   0,
+		})
+		fmt.Println(string(j))
+		return
+	}
+
 	format := "{{title}}|||{{artist}}|||{{mpris:artUrl}}|||{{status}}"
-	out, err := runPlayerctl("metadata", "--format", format)
+	out, err := runPlayerctl("--player", player, "metadata", "--format", format)
 	if err != nil {
-		ensureSpotifyRunning()
-		out, err = runPlayerctl("metadata", "--format", format)
-		if err != nil {
-			j, _ := json.Marshal(Track{
-				Title:    "Start Spotify",
-				Artist:   "Click play to start music",
-				AlbumArt: "",
-				Playing:  false,
-				Status:   "",
-				Position: 0,
-				Length:   0,
-			})
-			fmt.Println(string(j))
-			return
-		}
+		j, _ := json.Marshal(Track{
+			Title:    "Player error",
+			Artist:   "Check music player",
+			AlbumArt: "",
+			Playing:  false,
+			Status:   "Error",
+			Position: 0,
+			Length:   0,
+		})
+		fmt.Println(string(j))
+		return
 	}
 
 	parts := strings.SplitN(out, "|||", 4)
 	for len(parts) < 4 {
 		parts = append(parts, "")
 	}
+
 	status := parts[3]
 	playing := strings.EqualFold(status, "Playing")
 
-	positionStr, _ := runPlayerctl("position")
-	lengthStr, _ := runPlayerctl("metadata", "--format", "{{mpris:length}}")
+	positionStr, err := runPlayerctl("--player", player, "position")
+	if err != nil {
+		positionStr = "0"
+	}
+
+	lengthStr, err := runPlayerctl("--player", player, "metadata", "mpris:length")
+	if err != nil {
+		lengthStr = "0"
+	}
 
 	lengthMicros, err := strconv.ParseFloat(lengthStr, 64)
 	length := lengthMicros / 1000000.0
-	if err != nil {
+	if err != nil || length <= 0 {
 		length = 0
 	}
 
-	position := parseTime(positionStr)
+	position, err := strconv.ParseFloat(positionStr, 64)
+	if err != nil || position < 0 {
+		position = 0
+	}
+
+	if position == 0 && playing && length > 0 {
+		posMetadata, err := runPlayerctl("--player", player, "metadata", "--format", "{{position(position)}}")
+		if err == nil && posMetadata != "" {
+			if altPos, err := strconv.ParseFloat(posMetadata, 64); err == nil && altPos > 0 {
+				position = altPos
+			}
+		}
+	}
 
 	track := Track{
 		Title:    parts[0],
@@ -95,11 +147,32 @@ func MusicStatus() {
 		Position: position,
 		Length:   length,
 	}
+
 	json.NewEncoder(os.Stdout).Encode(track)
 }
 
 func MusicControl(action string) {
 	ensureSpotifyRunning()
 	time.Sleep(500 * time.Millisecond)
-	_ = exec.Command("playerctl", action).Run()
+
+	player := getCurrentPlayer()
+	if player == "" {
+		return
+	}
+
+	var err error
+	switch action {
+	case "play", "pause", "play-pause", "stop", "next", "previous":
+		err = exec.Command("playerctl", "--player", player, action).Run()
+	case "seek_forward":
+		err = exec.Command("playerctl", "--player", player, "position", "10+").Run()
+	case "seek_backward":
+		err = exec.Command("playerctl", "--player", player, "position", "10-").Run()
+	default:
+		err = exec.Command("playerctl", "--player", player, action).Run()
+	}
+
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error controlling player: %v\n", err)
+	}
 }
