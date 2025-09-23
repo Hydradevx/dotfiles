@@ -9,6 +9,7 @@ install: build
 	install -m 0755 $(BINARY) $(BINDIR)/$(BINARY)
 	@echo "Installed $(BINDIR)/$(BINARY)"
 	cp hydractl ~/.local/bin/
+	rm -rf hydractl
 
 clean:
 	rm -f $(BINARY)

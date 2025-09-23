@@ -24,8 +24,7 @@ Rectangle {
             anchors.fill: parent
             source: wallpaper
             blurEnabled: true
-            blur: 0.4
-            brightness: 0.1
+            blur: 1
         }
     }
 

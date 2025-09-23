@@ -7,7 +7,11 @@ Item {
     width: 24
     height: 24
 
-    signal togglePopup()
+    signal togglePopup(bool visible)
+
+    property real scaleFactor: 1.0
+    property real rotationAngle: 0
+    property bool isHovered: false
 
     Text {
         text: "󰎆" // Nerd Font music note icon
@@ -15,12 +19,32 @@ Item {
         font.family: "JetBrainsMono Nerd Font"
         color: Theme.Colors.on_surface
         anchors.centerIn: parent
+        
+        scale: musicIcon.scaleFactor
+        rotation: musicIcon.rotationAngle
+        
+        Behavior on scale {
+            NumberAnimation { duration: 200; easing.type: Easing.OutBack }
+        }
+        Behavior on rotation {
+            NumberAnimation { duration: 300; easing.type: Easing.OutCubic }
+        }
 
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
             cursorShape: Qt.PointingHandCursor
-            onClicked: musicIcon.togglePopup()
+            onEntered: {
+                musicIcon.scaleFactor = 1.2
+                musicIcon.rotationAngle = 15
+                musicIcon.isHovered = true
+                musicIcon.togglePopup(true)
+            }
+            onExited: {
+                musicIcon.scaleFactor = 1.0
+                musicIcon.rotationAngle = 0
+                musicIcon.isHovered = false
+            }
         }
     }
 }
