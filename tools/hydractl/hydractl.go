@@ -46,6 +46,8 @@ func main() {
 			fmt.Fprintf(os.Stderr, "unknown power command: %s\n", os.Args[2])
 			os.Exit(2)
 		}
+	case "quote":
+		quoteCommand()
 	default:
 		fmt.Fprintf(os.Stderr, "unknown command: %s\n", os.Args[1])
 		os.Exit(2)

@@ -85,7 +85,7 @@ PopupWindow {
 
     Process {
         id: quoteProc
-        command: ["bash", "-c", "shuf -n 1 ~/.config/quickshell/modules/quote/quotes.txt"]
+        command: ["hydractl", "quote"]
         running: false
         stdout: StdioCollector {
             onStreamFinished: {
