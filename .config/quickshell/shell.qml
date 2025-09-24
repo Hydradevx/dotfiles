@@ -11,6 +11,7 @@ import "modules/power"
 import "modules/app"
 import "modules/lock"
 import "modules/overview"
+import "modules/wallpaper"
 
 Scope {
     Bar { id: bar }
@@ -79,4 +80,8 @@ Scope {
     }
 
     Overview { id: overview }
+
+    WallpaperChanger {
+        id: wallpaperChanger
+    }
 }
