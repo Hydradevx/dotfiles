@@ -4,6 +4,7 @@ import "../public" as Theme
 import "../performance"
 import "../music"
 import "../power"
+import "../quote"
 
 PanelWindow {
     id: bar
@@ -35,6 +36,14 @@ PanelWindow {
     Clock {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
+    }
+
+    QuoteIcon {
+        id: quoteIcon
+        anchors.right: batteryIcon.left
+        anchors.rightMargin: 12
+        anchors.verticalCenter: parent.verticalCenter
+        onTogglePopup: qoutePopup.visible = !qoutePopup.visible
     }
 
     BatteryIcon {

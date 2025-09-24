@@ -12,6 +12,7 @@ import "modules/app"
 import "modules/lock"
 import "modules/overview"
 import "modules/wallpaper"
+import "modules/quote"
 
 Scope {
     Bar { id: bar }
@@ -83,5 +84,9 @@ Scope {
 
     WallpaperChanger {
         id: wallpaperChanger
+    }
+
+    QuotePopup {
+        id: qoutePopup
     }
 }
