@@ -6,195 +6,107 @@ import "../public" as Theme
 
 Item {
     id: root
-    property int workspaceCount: 10
-    property int workspaceSize: 32
-    property int spacing: 6
-    property int padding: 8
+    height: 25
+    width: pills.implicitWidth + 20
+
+    Behavior on width {
+        NumberAnimation {
+            duration: 200
+            easing.type: Easing.OutCubic
+        }
+    }
     
+    property bool verticalMode: false
+    transform: Rotation {
+        origin.x: width / 2
+        origin.y: height / 2
+        angle: verticalMode ? 90 : 0
+    }
+    
+    property int minWorkspaces: 4
+    property int currentWorkspace: activeWorkspaceId
     property list<HyprlandWorkspace> workspaces: []
     property int activeWorkspaceId: 1
 
-    implicitWidth: padding * 2 + workspaceCount * workspaceSize + (workspaceCount - 1) * spacing
-    implicitHeight: workspaceSize + padding * 2
-
-    Rectangle {
-        id: barBackground
-        anchors.fill: parent
-        color: Theme.Colors.surface_container_low
-        radius: height / 2
-        border.color: Theme.Colors.outline
-        border.width: 1
-        opacity: 0.95
-
-        // Workspace indicators container
-        Item {
-            id: container
-            anchors {
-                fill: parent
-                leftMargin: root.padding
-                rightMargin: root.padding
-            }
-            
-            Row {
-                id: workspaceRow
-                anchors.centerIn: parent
-                spacing: root.spacing
-                
-                Repeater {
-                    model: root.workspaceCount
-
-                    Item {
-                        id: workspaceItem
-                        width: root.workspaceSize
-                        height: root.workspaceSize
-                        
-                        property int wsId: index + 1
-                        property var ws: {
-                            // Find the workspace with this ID
-                            for (let i = 0; i < root.workspaces.length; i++) {
-                                if (root.workspaces[i].id === wsId) {
-                                    return root.workspaces[i]
-                                }
-                            }
-                            // Fallback workspace object
-                            return { 
-                                id: wsId,
-                                active: false,
-                                toplevels: { count: 0, values: [] },
-                                activate: function() { Hyprland.dispatch(`workspace ${wsId}`) }
-                            }
-                        }
-                        property bool isActive: wsId === root.activeWorkspaceId
-                        property bool hasWindows: ws.toplevels && ws.toplevels.count > 0
-
-                        // Active workspace background
-                        Rectangle {
-                            id: activeBg
-                            anchors.fill: parent
-                            radius: width / 2
-                            color: Theme.Colors.primary_container
-                            opacity: workspaceItem.isActive ? 0.8 : 0
-                            Behavior on opacity { NumberAnimation { duration: 200 } }
-                        }
-
-                        // Dot indicator
-                        Rectangle {
-                            id: dot
-                            anchors.centerIn: parent
-                            width: parent.width * 0.5
-                            height: width
-                            radius: width / 2
-                            
-                            color: {
-                                if (workspaceItem.isActive) return Theme.Colors.on_primary_container
-                                else if (workspaceItem.hasWindows) return Theme.Colors.secondary
-                                else return Theme.Colors.on_surface_variant
-                            }
-                            
-                            opacity: {
-                                if (workspaceItem.isActive) return 1.0
-                                else if (workspaceItem.hasWindows) return 0.8
-                                else return 0.4
-                            }
-                            
-                            scale: 1.0
-                            
-                            Behavior on color { ColorAnimation { duration: 200 } }
-                            Behavior on opacity { NumberAnimation { duration: 200 } }
-                            Behavior on scale { NumberAnimation { duration: 100 } }
-                        }
-
-                        MouseArea {
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: workspaceItem.ws.activate()
-                            
-                            onEntered: {
-                                dot.scale = 1.4
-                                dot.opacity = Math.min(dot.opacity + 0.3, 1.0)
-                            }
-                            onExited: {
-                                dot.scale = 1.0
-                                // Restore original opacity
-                                if (workspaceItem.isActive) dot.opacity = 1.0
-                                else if (workspaceItem.hasWindows) dot.opacity = 0.8
-                                else dot.opacity = 0.4
-                            }
-                        }
-                        
-                        // Tooltip
-                        ToolTip {
-                            visible: parent.MouseArea.containsMouse
-                            delay: 500
-                            text: {
-                                if (!workspaceItem.hasWindows) {
-                                    return `Workspace ${workspaceItem.wsId} - Empty`
-                                }
-                                return `Workspace ${workspaceItem.wsId} - ${workspaceItem.ws.toplevels.count} window(s)`
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+    ListModel { id: wsModel }
 
     function refreshWorkspaces() {
         console.log("Refreshing workspaces...")
-        const hw = Hyprland.workspaces.values
-        let newWorkspaces = []
-        let newActiveId = root.activeWorkspaceId
-        
-        // Create workspace array for all workspaces
-        for (let i = 0; i < root.workspaceCount; i++) {
-            const wsId = i + 1
-            let ws = hw.find(w => w.id === wsId)
-            
-            if (!ws) {
-                ws = { 
-                    id: wsId, 
-                    active: false, 
-                    toplevels: { count: 0, values: [] }
-                }
-            } else {
-                if (ws.active) {
-                    newActiveId = wsId
-                    console.log("Found active workspace:", wsId)
-                }
+        const real = Hyprland.workspaces?.values || [];
+        const sorted = real.slice().sort((a, b) => a.id - b.id);
+
+        // Find the currently active workspace
+        let activeWs = real.find(w => w.active);
+        if (activeWs) {
+            activeWorkspaceId = activeWs.id;
+            console.log("Active workspace found:", activeWorkspaceId);
+        }
+
+        const maxCount = Math.max(minWorkspaces, ...sorted.map(w => w.id));
+        const data = [];
+
+        for (let i = 1; i <= maxCount; i++) {
+            const ws = sorted.find(w => w.id === i);
+            data.push({
+                id: i,
+                focused: ws ? (ws.id === activeWorkspaceId) : (i === activeWorkspaceId),
+                name: ws ? ws.name : ""
+            });
+        }
+
+        if (wsModel.count !== data.length) {
+            wsModel.clear();
+            data.forEach(item => wsModel.append(item));
+        } else {
+            for (let i = 0; i < data.length; i++) {
+                wsModel.set(i, data[i]);
             }
-            newWorkspaces.push(ws)
         }
         
-        workspaces = newWorkspaces
-        activeWorkspaceId = newActiveId
+        // Update the workspaces property for compatibility
+        let newWorkspaces = [];
+        for (let i = 1; i <= maxCount; i++) {
+            const ws = sorted.find(w => w.id === i);
+            if (ws) {
+                newWorkspaces.push(ws);
+            } else {
+                newWorkspaces.push({ 
+                    id: i, 
+                    active: false, 
+                    toplevels: { count: 0, values: [] }
+                });
+            }
+        }
+        workspaces = newWorkspaces;
         
-        console.log("Workspaces refreshed. Active:", activeWorkspaceId, "Total:", workspaces.length)
+        console.log("Workspaces refreshed. Total:", wsModel.count, "Active:", activeWorkspaceId);
     }
 
     Component.onCompleted: {
         console.log("Workspaces component loaded")
         refreshWorkspaces()
-        
-        timer.start()
-    }
-
-    Timer {
-        id: timer
-        interval: 500
-        onTriggered: refreshWorkspaces()
     }
 
     Connections {
         target: Hyprland
         
-        function onWorkspacesChanged() {
+        function onActiveWsIdChanged() { 
+            console.log("Active workspace ID changed")
+            refreshWorkspaces(); 
+        }
+        
+        function onWorkspacesChanged() { 
             console.log("Hyprland workspaces changed")
-            refreshWorkspaces()
+            refreshWorkspaces(); 
         }
         
         function onFocusedWorkspaceChanged() {
             console.log("Focused workspace changed")
+            refreshWorkspaces()
+        }
+        
+        function onActiveWorkspaceChanged() {
+            console.log("Active workspace changed")
             refreshWorkspaces()
         }
         
@@ -212,10 +124,84 @@ Item {
             console.log("Toplevels changed")
             refreshWorkspaces()
         }
-        
-        function onValuesChanged() {
-            console.log("Values changed")
-            refreshWorkspaces()
+    }
+
+    Rectangle {
+        id: bgRect
+        opacity: 1
+        Behavior on opacity { 
+            NumberAnimation { 
+                duration: 200
+                easing.type: Easing.OutCubic 
+            } 
+        }
+
+        anchors.fill: parent
+        color: Theme.Colors.surface_container_low
+        radius: 20
+        border.color: Theme.Colors.outline
+        border.width: 1
+    }
+
+    Row {
+        id: pills
+        anchors.centerIn: parent
+        spacing: 10
+
+        Repeater {
+            model: wsModel
+
+            delegate: Rectangle {
+                id: pill
+                width: focused ? 20 : 10
+                height: 10
+                radius: 20
+                anchors.verticalCenter: parent.verticalCenter
+                opacity: focused ? 1.0 : 0.4
+                color: focused ? Theme.Colors.primary : Theme.Colors.on_surface
+                               
+
+                Behavior on width { 
+                    NumberAnimation { 
+                        duration: 200
+                        easing.type: Easing.OutCubic 
+                    } 
+                }
+                Behavior on opacity { 
+                    NumberAnimation { 
+                        duration: 200
+                        easing.type: Easing.OutCubic 
+                    } 
+                }
+                Behavior on color { 
+                    ColorAnimation { 
+                        duration: 200
+                        easing.type: Easing.OutCubic 
+                    } 
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
+                    onClicked: {
+                        if (activeWorkspaceId !== id) {
+                            console.log("Switching to workspace", id)
+                            Hyprland.dispatch(`workspace ${id}`)
+                        }
+                    }
+                    onEntered: {
+                        pill.scale = 1.2
+                    }
+                    onExited: {
+                        pill.scale = 1.0
+                    }
+                }
+                
+                Behavior on scale {
+                    NumberAnimation { duration: 100 }
+                }
+            }
         }
     }
 }
