@@ -11,7 +11,7 @@ import "modules/power"
 import "src/widgets/app-launcher"
 import "src/widgets/lock-screen"
 import "modules/overview"
-import "modules/wallpaper"
+import "src/widgets/wallpaper-switcher"
 import "modules/quote"
 
 Scope {
@@ -82,7 +82,7 @@ Scope {
 
     Overview { id: overview }
 
-    WallpaperChanger {
+    WallpaperSwitcher {
         id: wallpaperChanger
     }
 
