@@ -10,7 +10,7 @@ import "../globals/state" as GlobalState
 PanelWindow {
     id: appLauncher
     visible: false
-    implicitWidth: 1000
+    implicitWidth: 900
     implicitHeight: 700
     color: "transparent"
 
@@ -25,8 +25,8 @@ PanelWindow {
         width: Math.min(parent.width * 0.9, 1000)
         height: Math.min(parent.height * 0.85, 700)
         radius: 24
-        color: GlobalState.ThemeManager.surface
-        border.color: GlobalState.ThemeManager.outline
+        color: "transparent"
+        border.color: GlobalState.Colors.outline
         border.width: 1
         opacity: 0.98
 
@@ -57,7 +57,7 @@ PanelWindow {
                 text: appGrid.appCount + " applications"
                 font.family: GlobalState.ThemeManager.fontFamily
                 font.pixelSize: GlobalState.ThemeManager.fontSizeSmall
-                color: GlobalState.ThemeManager.on_surface_variant
+                color: GlobalState.Colors.on_surface_variant
                 opacity: 0.7
                 Layout.alignment: Qt.AlignRight
             }

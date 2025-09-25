@@ -11,13 +11,13 @@ Rectangle {
     
     signal clicked()
     
-    color: hovered ? GlobalState.ThemeManager.error_container : "transparent"
+    color: hovered ? GlobalState.Colors.error_container : "transparent"
     
     Text {
         text: "×"
         font.pixelSize: 20
         font.weight: Font.Bold
-        color: hovered ? GlobalState.ThemeManager.on_error_container : GlobalState.ThemeManager.on_surface_variant
+        color: hovered ? GlobalState.Colors.on_error_container : GlobalState.ThemeManager.on_surface_variant
         anchors.centerIn: parent
     }
 

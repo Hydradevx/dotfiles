@@ -1,19 +1,21 @@
 import QtQuick
+import Quickshell
 import "../../components/layout" as Layout
 import "../../globals/state" as GlobalState
 
 Layout.Card {
     id: appCard
     property var application
-    property string appName: application ? application.name : ""
+    property string appName: application ? application.name : "Unknown"
     property string appIcon: application ? application.icon : ""
     
     width: 165
     height: 145
-    color: hovered ? GlobalState.ThemeManager.primary_container : GlobalState.ThemeManager.surface_variant
+    color: hovered ? GlobalState.Colors.primary_container : GlobalState.Colors.surface_variant
     
     onClicked: {
-        if (application) {
+        console.log("Launching app:", appName)
+        if (application && application.execute) {
             application.execute()
             appCard.appLaunched()
         }
@@ -30,17 +32,17 @@ Layout.Card {
             width: 64
             height: 64
             radius: GlobalState.ThemeManager.radiusMedium
-            color: hovered ? GlobalState.ThemeManager.primary : GlobalState.ThemeManager.surface
+            color: hovered ? GlobalState.Colors.primary : GlobalState.Colors.surface
             anchors.horizontalCenter: parent.horizontalCenter
 
             Image {
-                source: application ? Quickshell.iconPath(appIcon) : ""
+                source: application && appIcon ? Quickshell.iconPath(appIcon) : ""
                 width: 40
                 height: 40
                 anchors.centerIn: parent
                 fillMode: Image.PreserveAspectFit
                 smooth: true
-                opacity: 0.9
+                opacity: source.toString() !== "" ? 0.9 : 0.3
             }
         }
 
@@ -49,7 +51,7 @@ Layout.Card {
             font.family: GlobalState.ThemeManager.fontFamily
             font.pixelSize: GlobalState.ThemeManager.fontSizeSmall
             font.weight: Font.Medium
-            color: hovered ? GlobalState.ThemeManager.on_primary_container : GlobalState.ThemeManager.on_surface_variant
+            color: hovered ? GlobalState.Colors.on_primary_container : GlobalState.Colors.on_surface_variant
             wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
             maximumLineCount: 2

@@ -9,7 +9,7 @@ Rectangle {
     signal clicked()
     
     radius: GlobalState.ThemeManager.radiusLarge
-    border.color: GlobalState.ThemeManager.outline
+    border.color: GlobalState.Colors.outline
     border.width: 1
     
     scale: hovered ? 1.05 : 1.0

@@ -11,8 +11,8 @@ Rectangle {
     property alias text: textField.text
     
     radius: GlobalState.ThemeManager.radiusMedium
-    color: GlobalState.ThemeManager.surface_variant
-    border.color: GlobalState.ThemeManager.outline
+    color: GlobalState.Colors.surface_variant
+    border.color: GlobalState.Colors.outline
     border.width: 1
 
     RowLayout {

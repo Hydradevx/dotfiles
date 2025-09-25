@@ -12,7 +12,7 @@ ScrollBar {
     
     contentItem: Rectangle {
         radius: 4
-        color: GlobalState.ThemeManager.outline
+        color: GlobalState.Colors.outline
         opacity: 0.6
     }
 }
