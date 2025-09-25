@@ -17,7 +17,7 @@ Rectangle {
         text: "×"
         font.pixelSize: 20
         font.weight: Font.Bold
-        color: hovered ? GlobalState.Colors.on_error_container : GlobalState.ThemeManager.on_surface_variant
+        color: hovered ? GlobalState.Colors.on_error_container : GlobalState.Colors.on_surface_variant
         anchors.centerIn: parent
     }
 

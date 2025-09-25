@@ -4,7 +4,6 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell.Hyprland
 import "../../components/basic" as Basic
-import "../globals/shortcuts" as Shortcuts
 import "../globals/state" as GlobalState
 
 PanelWindow {
@@ -76,7 +75,7 @@ PanelWindow {
         }
     }
 
-    GlobalShortcut {
+        GlobalShortcut {
         name: "appLauncherToggle"
         description: "Toggle App Launcher"
         onPressed: {
