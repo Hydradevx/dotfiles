@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import Quickshell
 import Quickshell.Hyprland
-import "../public" as Theme
+import "../../../globals/state" as GlobalState
 
 Item {
     id: root
@@ -137,9 +137,9 @@ Item {
         }
 
         anchors.fill: parent
-        color: Theme.Colors.surface_container_low
+        color: GlobalState.Colors.surface_container_low
         radius: 20
-        border.color: Theme.Colors.outline
+        border.color: GlobalState.Colors.outline
         border.width: 1
     }
 
@@ -158,7 +158,7 @@ Item {
                 radius: 20
                 anchors.verticalCenter: parent.verticalCenter
                 opacity: focused ? 1.0 : 0.4
-                color: focused ? Theme.Colors.primary : Theme.Colors.on_surface
+                color: focused ? GlobalState.Colors.primary : GlobalState.Colors.on_surface
                                
 
                 Behavior on width { 

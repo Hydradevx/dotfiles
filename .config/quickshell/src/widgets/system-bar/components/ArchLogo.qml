@@ -1,14 +1,12 @@
 import QtQuick
-import "../public" as Theme
-import "../modules/app"
-import Quickshell.Io
+import "../../../globals/state" as GlobalState
 
 Text {
     id: archLogo
     text: ""
     font.pixelSize: 30
     font.family: "JetBrainsMono Nerd Font"
-    color: isActive ? Theme.Colors.primary : Theme.Colors.on_surface
+    color: isActive ? GlobalState.Colors.primary : GlobalState.Colors.on_surface
     anchors.verticalCenter: parent.verticalCenter
     leftPadding: 10
 

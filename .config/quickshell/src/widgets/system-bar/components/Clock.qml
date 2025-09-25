@@ -1,5 +1,5 @@
 import QtQuick
-import "../public" as Theme
+import "../../../globals/state" as GlobalState
 
 Row {
     id: clock
@@ -9,7 +9,7 @@ Row {
 
     Text {
         id: timeText
-        color: Theme.Colors.on_surface
+        color: GlobalState.Colors.on_surface
         font.pixelSize: 14
         font.family: "Maple Mono NF"
         text: Qt.formatDateTime(new Date(), "HH:mm")
@@ -24,7 +24,7 @@ Row {
 
     Text {
         id: dateText
-        color: Theme.Colors.on_surface_variant
+        color: GlobalState.Colors.on_surface_variant
         font.pixelSize: 14
         font.family: "Maple Mono NF"
         text: Qt.formatDateTime(new Date(), "ddd, dd MMM")

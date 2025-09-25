@@ -2,7 +2,7 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell.Io
 import Quickshell.Hyprland
-import "modules/bar"
+import "src/widgets/system-bar"
 import "modules/performance"
 import "modules/music"
 import "modules/logout"
@@ -15,7 +15,9 @@ import "src/widgets/wallpaper-switcher"
 import "modules/quote"
 
 Scope {
-    Bar { id: bar }
+    SystemBar { 
+        id: bar 
+    }
 
     PerformancePopup {
         id: perfPopup
