@@ -4,10 +4,10 @@ import Quickshell.Io
 import Quickshell.Hyprland
 import "src/widgets/system-bar"
 import "modules/performance"
-import "modules/music"
+import "src/modules/music"
 import "src/widgets/logout-panel"
 import "src/widgets/notification-panel"
-import "modules/power"
+import "src/modules/power"
 import "src/widgets/app-launcher"
 import "src/widgets/lock-screen"
 import "modules/overview"

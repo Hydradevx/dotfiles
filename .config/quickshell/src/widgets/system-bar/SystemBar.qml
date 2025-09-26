@@ -1,10 +1,11 @@
 import QtQuick
 import Quickshell
 import "../../globals/state" as GlobalState
+import "./icons" as BarIcons 
 import "./components"
 
 PanelWindow {
-    id: bar
+    id: systemBar
     implicitHeight: 32
     screen: Quickshell.screens[0]
     color: GlobalState.Colors.surface
@@ -14,7 +15,7 @@ PanelWindow {
         left: true
         right: true
     }
-    
+
     ArchLogo {
         id: archLogo
         anchors.left: parent.left
@@ -33,6 +34,30 @@ PanelWindow {
     Clock {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
+    }
+
+    BarIcons.BatteryIcon {
+        id: batteryIcon
+        anchors.right: musicIcon.left
+        anchors.rightMargin: 12
+        anchors.verticalCenter: parent.verticalCenter
+        onTogglePopup: function(visible) {
+            if (batteryPopup) {
+                batteryPopup.visible = visible
+            }
+        }
+    }
+
+    BarIcons.MusicIcon {
+        id: musicIcon
+        anchors.right: powerBtn.left
+        anchors.rightMargin: 12
+        anchors.verticalCenter: parent.verticalCenter
+        onTogglePopup: function(visible) {
+            if (musicPopup) {
+                musicPopup.visible = visible
+            }
+        }
     }
 
     PowerButton {

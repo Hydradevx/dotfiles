@@ -1,7 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
-import "../globals/state" as GlobalState
+import "../../globals/state" as GlobalState
 
 PanelWindow {
     id: panelWindow
