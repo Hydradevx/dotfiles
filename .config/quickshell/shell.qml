@@ -5,7 +5,7 @@ import Quickshell.Hyprland
 import "src/widgets/system-bar"
 import "modules/performance"
 import "modules/music"
-import "modules/logout"
+import "src/widgets/logout-panel"
 import "src/widgets/notification-panel"
 import "modules/power"
 import "src/widgets/app-launcher"

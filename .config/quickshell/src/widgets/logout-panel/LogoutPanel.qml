@@ -4,7 +4,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Io
-import "../public" as Theme
+import "../../globals/state" as GlobalState
 
 PanelWindow {
     anchors.top: true
@@ -19,7 +19,7 @@ PanelWindow {
     Rectangle {
         id: bg
         anchors.fill: parent
-        color: Theme.Colors.surface_variant
+        color: GlobalState.Colors.surface_variant
         opacity: 0.9
         focus: true
 
@@ -46,8 +46,8 @@ PanelWindow {
                     width: 100
                     height: 100
                     radius: 50
-                    color: hovered ? Theme.Colors.primary : Theme.Colors.surface
-                    border.color: Theme.Colors.outline
+                    color: hovered ? GlobalState.Colors.primary : GlobalState.Colors.surface
+                    border.color: GlobalState.Colors.outline
 
                     property bool hovered: false
 
@@ -66,7 +66,7 @@ PanelWindow {
                         anchors.centerIn: parent
                         text: modelData.icon
                         font.pixelSize: 40
-                        color: parent.hovered ? Theme.Colors.on_primary : Theme.Colors.on_surface
+                        color: parent.hovered ? GlobalState.Colors.on_primary : GlobalState.Colors.on_surface
                     }
                 }
             }
