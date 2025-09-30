@@ -2,20 +2,22 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell.Io
 import Quickshell.Hyprland
-import "modules/bar"
+import "src/widgets/system-bar"
 import "modules/performance"
-import "modules/music"
-import "modules/logout"
-import "modules/notification"
-import "modules/power"
-import "modules/app"
-import "modules/lock"
+import "src/modules/music"
+import "src/widgets/logout-panel"
+import "src/widgets/notification-panel"
+import "src/modules/power"
+import "src/widgets/app-launcher"
+import "src/widgets/lock-screen"
 import "modules/overview"
-import "modules/wallpaper"
+import "src/widgets/wallpaper-switcher"
 import "modules/quote"
 
 Scope {
-    Bar { id: bar }
+    SystemBar { 
+        id: bar 
+    }
 
     PerformancePopup {
         id: perfPopup
@@ -82,7 +84,7 @@ Scope {
 
     Overview { id: overview }
 
-    WallpaperChanger {
+    WallpaperSwitcher {
         id: wallpaperChanger
     }
 
